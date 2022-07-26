@@ -1,34 +1,35 @@
 import { useState } from 'react';
 import styles from './Pizza.module.scss';
 
-
-export default function Pizza({id, title, price, imageUrl, sizes, types, rating, category}) {
+export default function Pizza({ id, title, price, imageUrl, sizes, types, rating, category }) {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   const typeNames = ['тонкое', 'традиционное'];
-  
+
   return (
     <div className={styles.pizza}>
-      <img
-        className={styles.image}
-        src={imageUrl}
-        alt={title}
-      />
+      <img className={styles.image} src={imageUrl} alt={title} />
       <h4 className={styles.title}>{title}</h4>
       <div className={styles.selector}>
         <ul>
-          {
-            types.map((typeId, index) => (
-              <li key={`${id}${index}`} className={activeType === index ? styles.active : ''} onClick={() => setActiveType(index)}>{typeNames[typeId]}</li>
-            ))
-          }
+          {types.map((typeId, index) => (
+            <li
+              key={`${id}${index}`}
+              className={activeType === index ? styles.active : ''}
+              onClick={() => setActiveType(index)}>
+              {typeNames[typeId]}
+            </li>
+          ))}
         </ul>
         <ul>
-          {
-            sizes.map((size, index) => (
-              <li key={`${id}${index}`} className={activeSize === index ? styles.active : ''} onClick={() => setActiveSize(index)}>{size} см.</li>
-            ))
-          }
+          {sizes.map((size, index) => (
+            <li
+              key={`${id}${index}`}
+              className={activeSize === index ? styles.active : ''}
+              onClick={() => setActiveSize(index)}>
+              {size} см.
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.bottom}>
