@@ -2,35 +2,38 @@ import { useState } from 'react';
 import styles from './Pizza.module.scss';
 
 
-export default function Pizza({id, title, price, image, sizes, rating, category}) {
-  const [pizzaCount, setPizzaCount] = useState(0);
-
-  const addPizza = () => {
-    setPizzaCount(pizzaCount + 1);
-  }
-
+export default function Pizza({id, title, price, imageUrl, sizes, types, rating, category}) {
+  const [activeType, setActiveType] = useState(0);
+  const [activeSize, setActiveSize] = useState(0);
+  const typeNames = ['тонкое', 'традиционное'];
+  
   return (
     <div className={styles.pizza}>
       <img
         className={styles.image}
-        src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-        alt='Pizza'
+        src={imageUrl}
+        alt={title}
       />
-      <h4 className={styles.title}>Чизбургер-пицца</h4>
+      <h4 className={styles.title}>{title}</h4>
       <div className={styles.selector}>
         <ul>
-          <li className={styles.active}>тонкое</li>
-          <li>традиционное</li>
+          {
+            types.map((typeId, index) => (
+              <li key={`${id}${index}`} className={activeType === index ? styles.active : ''} onClick={() => setActiveType(index)}>{typeNames[typeId]}</li>
+            ))
+          }
         </ul>
         <ul>
-          <li className={styles.active}>26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {
+            sizes.map((size, index) => (
+              <li key={`${id}${index}`} className={activeSize === index ? styles.active : ''} onClick={() => setActiveSize(index)}>{size} см.</li>
+            ))
+          }
         </ul>
       </div>
       <div className={styles.bottom}>
         <div className={styles.price}>от {price} ₽</div>
-        <button className='button button--outline button--add' onClick={addPizza}>
+        <button className='button button--outline button--add'>
           <svg
             width='12'
             height='12'
@@ -43,7 +46,7 @@ export default function Pizza({id, title, price, image, sizes, rating, category}
             />
           </svg>
           <span>Добавить</span>
-          <i>{pizzaCount}</i>
+          <i>0</i>
         </button>
       </div>
     </div>
