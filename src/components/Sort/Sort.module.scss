@@ -7,13 +7,21 @@
 .popup {
   position: absolute;
   right: 0;
+  z-index: 10;
   overflow: hidden;
   margin-top: 15px;
   border-radius: 10px;
   padding: 10px 0;
   width: 160px;
+  max-height: 0;
   box-shadow: 0 5px 15px rgb(0 0 0 / 9%);
   background: #fff;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    visibility $duration * 2 ease,
+    max-height $duration * 6 ease,
+    opacity $duration * 2 ease;
 
   ul {
     overflow: hidden;
@@ -21,6 +29,10 @@
     li {
       padding: 12px 20px;
       cursor: pointer;
+
+      &:hover {
+        background: rgb(254 95 30 / 5%);
+      }
     }
   }
 }
@@ -37,9 +49,11 @@
 .label {
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   svg {
     margin-right: 8px;
+    transition: transform 0.3s ease;
   }
 
   b {
@@ -50,5 +64,19 @@
     border-bottom: 1px dashed $orange;
     color: $orange;
     cursor: pointer;
+  }
+}
+
+.open {
+  .popup {
+    max-height: 500px;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .label {
+    svg {
+      transform: rotate(180deg);
+    }
   }
 }

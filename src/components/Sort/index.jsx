@@ -1,9 +1,17 @@
+import { useState } from 'react';
+
 import styles from './Sort.module.scss';
 
 export default function Sort() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className={styles.sort}>
-      <div className={styles.label}>
+    <div className={`${styles.sort} ${ isOpen ? styles.open : ''}`} >
+      <div className={styles.label} onClick={handleClick}>
         <svg
           width='10'
           height='6'
