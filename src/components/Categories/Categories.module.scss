@@ -1,0 +1,34 @@
+/* stylelint-disable scss/no-global-function-names */
+@import "../../scss/variables";
+@import "../../scss/libs/normalize";
+
+.categories {
+  ul {
+    display: flex;
+
+    li {
+      @include noselect;
+
+      margin-right: 10px;
+      border-radius: 30px;
+      padding: 13px 30px;
+      font-weight: 700;
+      background-color: #f9f9f9;
+      transition: background-color 0.1s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken(#f9f9f9, 2%);
+      }
+
+      &:active {
+        background-color: darken(#f9f9f9, 5%);
+      }
+    }
+  }
+}
+
+.active {
+  color: #fff;
+  background-color: #282828 !important;
+}

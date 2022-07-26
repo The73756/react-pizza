@@ -1,0 +1,150 @@
+@import "../variables";
+
+.button {
+  @include noselect;
+
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  padding: 10px 20px;
+  min-width: 100px;
+  text-align: center;
+  background-color: $orange;
+  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  cursor: pointer;
+
+  &,
+  span {
+    color: #fff;
+  }
+
+  i,
+  span,
+  path,
+  svg {
+    transition: all $duration ease-in-out;
+  }
+
+  &__delimiter {
+    margin-right: 14px;
+    margin-left: 14px;
+    width: 1px;
+    height: 25px;
+    background-color: rgb(255 255 255 / 25%);
+  }
+
+  &:hover {
+    background-color: darken($orange, 8%);
+  }
+
+  &:active {
+    background-color: darken($orange, 12%);
+    transform: translateY(1px);
+  }
+
+  &--circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  &--black {
+    background-color: $black;
+
+    &:hover,
+    &:active {
+      background-color: lighten($color: $black, $amount: 10);
+    }
+  }
+
+  &--outline {
+    border-color: $orange;
+    background-color: #fff;
+
+    &,
+    span {
+      color: $orange;
+    }
+
+    svg {
+      path {
+        fill: $orange;
+      }
+    }
+
+    &:hover {
+      background-color: $orange;
+
+      &,
+      span {
+        color: #fff;
+      }
+
+      svg {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+
+    &:active {
+      background-color: darken($orange, 8%);
+    }
+  }
+
+  &--add {
+    svg {
+      margin-right: 2px;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    i {
+      position: relative;
+      left: 3px;
+      top: -1px;
+      display: inline-block;
+      border-radius: 30px;
+      width: 22px;
+      height: 22px;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 13px;
+      line-height: 22px;
+      color: #fff;
+      background-color: $orange;
+    }
+
+    &:hover {
+      i {
+        color: $orange;
+        background-color: #fff;
+      }
+    }
+  }
+
+  &--cart {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    line-height: 23px;
+
+    svg {
+      margin-right: 8px;
+      margin-bottom: 1px;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+}
