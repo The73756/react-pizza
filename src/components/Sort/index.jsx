@@ -3,15 +3,25 @@ import { useState } from 'react';
 import styles from './Sort.module.scss';
 
 export default function Sort() {
+  const list = ['популярности', 'цене', 'алфавиту'];
   const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(list[0]);
 
-  const handleClick = () => {
+  const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleClickSelect = (item) => {
+    setSelected(item);
+    setIsOpen(false);
+  };
+
   return (
-    <div className={`${styles.sort} ${ isOpen ? styles.open : ''}`} >
-      <div className={styles.label} onClick={handleClick}>
+    <button
+      className={`${styles.sort} ${isOpen ? styles.open : ''}`}
+      onClick={handleClickPopup}
+      onBlur={() => setIsOpen(false)}>
+      <div className={styles.label}>
         <svg
           width='10'
           height='6'
@@ -24,15 +34,20 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span>{selected}</span>
       </div>
       <div className={styles.popup}>
         <ul>
-          <li className={styles.active}>популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
+          {list.map((item, index) => (
+            <li
+              className={selected === item ? styles.active : ''}
+              key={index}
+              onClick={() => handleClickSelect(item)}>
+              {item}
+            </li>
+          ))}
         </ul>
       </div>
-    </div>
+    </button>
   );
 }

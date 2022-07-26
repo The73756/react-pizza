@@ -2,6 +2,11 @@
 
 .sort {
   position: relative;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  background: transparent;
+  cursor: pointer;
 }
 
 .popup {
@@ -25,6 +30,7 @@
 
   ul {
     overflow: hidden;
+    text-align: left;
 
     li {
       padding: 12px 20px;
@@ -40,10 +46,7 @@
 .popup .active {
   font-weight: 700;
   color: $orange;
-
-  &:hover {
-    background: rgb(254 95 30 / 5%);
-  }
+  background-color: rgb(254 95 30 / 5%);
 }
 
 .label {
