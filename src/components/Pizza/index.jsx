@@ -1,6 +1,14 @@
+import { useState } from 'react';
 import styles from './Pizza.module.scss';
 
+
 export default function Pizza({id, title, price, image, sizes, rating, category}) {
+  const [pizzaCount, setPizzaCount] = useState(0);
+
+  const addPizza = () => {
+    setPizzaCount(pizzaCount + 1);
+  }
+
   return (
     <div className={styles.pizza}>
       <img
@@ -22,7 +30,7 @@ export default function Pizza({id, title, price, image, sizes, rating, category}
       </div>
       <div className={styles.bottom}>
         <div className={styles.price}>от {price} ₽</div>
-        <div className='button button--outline button--add'>
+        <button className='button button--outline button--add' onClick={addPizza}>
           <svg
             width='12'
             height='12'
@@ -35,8 +43,8 @@ export default function Pizza({id, title, price, image, sizes, rating, category}
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          <i>{pizzaCount}</i>
+        </button>
       </div>
     </div>
   );
