@@ -1,7 +1,6 @@
-import React from 'react';
 import styles from './Pizza.module.scss';
 
-export default function Pizza() {
+export default function Pizza({id, title, price, image, sizes, rating, category}) {
   return (
     <div className={styles.pizza}>
       <img
@@ -22,7 +21,7 @@ export default function Pizza() {
         </ul>
       </div>
       <div className={styles.bottom}>
-        <div className={styles.price}>от 395 ₽</div>
+        <div className={styles.price}>от {price} ₽</div>
         <div className='button button--outline button--add'>
           <svg
             width='12'
