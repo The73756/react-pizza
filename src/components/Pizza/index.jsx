@@ -8,7 +8,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, rating
 
   return (
     <div className={styles.pizza}>
-      <img className={styles.image} src={imageUrl} alt={title} />
+      <img className={styles.image} width={270} height={270} src={imageUrl} alt={title} />
       <h4 className={styles.title}>{title}</h4>
       <div className={styles.selector}>
         <ul>
