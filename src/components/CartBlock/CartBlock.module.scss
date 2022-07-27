@@ -122,44 +122,44 @@
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
-}
 
-.goBackBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-color: darken($color: $gray-line, $amount: 10);
-  width: 210px;
-
-  span {
-    font-weight: 600;
-    color: darken($color: $gray-line, $amount: 20);
-  }
-
-  svg {
-    margin-right: 12px;
-
-    path {
-      fill: transparent;
-      stroke-width: 2;
-    }
-  }
-
-  &:hover {
-    border-color: darken($color: $gray-line, $amount: 90);
-    background-color: darken($color: $gray-line, $amount: 90);
+  .goBackBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: darken($color: $gray-line, $amount: 10);
+    width: 210px;
 
     span {
-      color: $gray-line;
+      font-weight: 600;
+      color: darken($color: $gray-line, $amount: 20);
+    }
+
+    svg {
+      margin-right: 12px;
+
+      path {
+        fill: transparent;
+        stroke-width: 2;
+      }
+    }
+
+    &:hover {
+      border-color: darken($color: $gray-line, $amount: 90);
+      background-color: darken($color: $gray-line, $amount: 90);
+
+      span {
+        color: $gray-line;
+      }
     }
   }
-}
 
-.payBtn {
-  padding: 16px;
-  width: 210px;
-  font-weight: 600;
-  font-size: 16px;
+  .payBtn {
+    padding: 16px;
+    width: 210px;
+    font-weight: 600;
+    font-size: 16px;
+  }
 }
 
 .itemCount {

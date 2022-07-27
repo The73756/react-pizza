@@ -304,7 +304,7 @@ export default function CartBlock() {
             <p>тонкое тесто, 26 см.</p>
           </div>
           <div className={styles.itemCount}>
-            <div className={`button button--outline button--circle ${styles.itemCountMinus}`}>
+            <div className='button button--outline button--circle'>
               <svg
                 width='10'
                 height='10'
@@ -376,7 +376,7 @@ export default function CartBlock() {
           </span>
         </div>
         <div className={styles.bottomButtons}>
-          <a href='/' className={`button button--outline button--circle ${styles.goBackBtn}`}>
+          <a href='/' className={`button button--outline button--add ${styles.goBackBtn}`}>
             <svg
               width='8'
               height='14'
