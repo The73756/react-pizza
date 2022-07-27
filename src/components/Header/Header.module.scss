@@ -3,6 +3,10 @@
 .header {
   border-bottom: 1px solid $gray-line;
   padding: 40px 0;
+
+  @media (max-width: 576px) {
+    padding: 20px 0;
+  }
 }
 
 .container {

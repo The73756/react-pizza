@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 
-export default function Header() {
+export default function Header({ isCart }) {
   return (
     <div className={styles.header}>
       <div className={styles.container}>
