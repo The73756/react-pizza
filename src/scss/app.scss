@@ -15,6 +15,15 @@ body {
   height: 100%;
   max-width: 1400px;
   background-color: #fff;
+
+  @media (max-width: 976px) {
+    margin-top: 20px;
+    width: auto;
+  }
+
+  @media (max-width: 576px) {
+    margin-top: 0;
+  }
 }
 
 .content {
@@ -28,15 +37,21 @@ body {
   }
 
   &__items {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    row-gap: 65px;
   }
 
   &__top {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 576px) {
+      justify-content: center;
+    }
   }
 }
 

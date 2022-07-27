@@ -5,25 +5,45 @@
 .categories {
   ul {
     display: flex;
+    flex-wrap: wrap;
+  }
+
+  li {
+    @include noselect;
+
+    margin-right: 10px;
+    border-radius: 30px;
+    padding: 13px 30px;
+    font-weight: 700;
+    background-color: #f9f9f9;
+    transition: background-color 0.1s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(#f9f9f9, 2%);
+    }
+
+    &:active {
+      background-color: darken(#f9f9f9, 5%);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    ul {
+      margin-bottom: 20px;
+    }
 
     li {
-      @include noselect;
+      margin-right: 0;
+      margin-bottom: 5px;
+      padding: 10px 20px;
+    }
+  }
 
-      margin-right: 10px;
-      border-radius: 30px;
-      padding: 13px 30px;
-      font-weight: 700;
-      background-color: #f9f9f9;
-      transition: background-color 0.1s ease-in-out;
-      cursor: pointer;
-
-      &:hover {
-        background-color: darken(#f9f9f9, 2%);
-      }
-
-      &:active {
-        background-color: darken(#f9f9f9, 5%);
-      }
+  @media (max-width: 576px) {
+    ul {
+      align-items: center;
+      justify-content: space-between;
     }
   }
 }

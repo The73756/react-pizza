@@ -2,13 +2,9 @@
 @import "../../scss/libs/normalize";
 
 .pizza {
-  margin-bottom: 65px;
-  width: 280px;
+  margin: 0 auto;
+  width: 100%;
   text-align: center;
-
-  &:not(:nth-of-type(4n)) {
-    margin-right: 35px;
-  }
 }
 
 .title {
@@ -19,7 +15,8 @@
 }
 
 .image {
-  width: 260px;
+  max-width: 90%;
+  object-fit: contain;
 }
 
 .selector {
