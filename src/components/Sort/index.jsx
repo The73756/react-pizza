@@ -6,12 +6,12 @@ export default function Sort({ value, onChangeSort }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const list = [
-    { name: 'популярности 🡻', sortProperty: 'rating', order: 'asc' },
-    { name: 'популярности 🡹', sortProperty: 'rating', order: 'desc' },
-    { name: 'алфавиту 🡻', sortProperty: 'title', order: 'asc' },
-    { name: 'алфавиту 🡹', sortProperty: 'title', order: 'desc' },
-    { name: 'цене 🡻', sortProperty: 'price', order: 'asc' },
-    { name: 'цене 🡹', sortProperty: 'price', order: 'desc' },
+    { name: 'популярности 🡻', sortProperty: 'rating', order: 'desc' },
+    { name: 'популярности 🡹', sortProperty: 'rating', order: 'asc' },
+    { name: 'алфавиту 🡹', sortProperty: 'title', order: 'asc' },
+    { name: 'алфавиту 🡻', sortProperty: 'title', order: 'desc' },
+    { name: 'цене 🡹', sortProperty: 'price', order: 'asc' },
+    { name: 'цене 🡻', sortProperty: 'price', order: 'desc' },
   ];
 
   const handleClickPopup = () => {
