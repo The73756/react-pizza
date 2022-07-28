@@ -8,10 +8,13 @@ import { Skeleton } from '../components/Pizza/Skeleton';
 export default function Home() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState(0);
+  const [sortType, setSortType] = useState(0);
 
   useEffect(() => {
     try {
-      fetch('https://62dfc893976ae7460bf39a43.mockapi.io/items')
+      setIsLoading(true);
+      fetch('https://62dfc893976ae7460bf39a43.mockapi.io/items?category=' + categoryId)
         .then((res) => res.json())
         .then((json) => {
           setItems(json);
@@ -21,11 +24,11 @@ export default function Home() {
       alert('Ошибка при загрузке приложения!');
       console.error(error);
     }
-  }, []);
+  }, [categoryId]);
   return (
     <>
       <div className='content__top'>
-        <Categories />
+        <Categories value={categoryId} onClickCategory={setCategoryId} />
         <Sort />
       </div>
       <h2 className='content__title'>Все пиццы</h2>
