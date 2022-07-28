@@ -2,17 +2,24 @@ import { useState } from 'react';
 
 import styles from './Sort.module.scss';
 
-export default function Sort() {
-  const list = ['популярности', 'цене', 'алфавиту'];
+export default function Sort({ value, onChangeSort }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(list[0]);
+
+  const list = [
+    { name: 'популярности 🡻', sortProperty: 'rating', order: 'asc' },
+    { name: 'популярности 🡹', sortProperty: 'rating', order: 'desc' },
+    { name: 'алфавиту 🡻', sortProperty: 'title', order: 'asc' },
+    { name: 'алфавиту 🡹', sortProperty: 'title', order: 'desc' },
+    { name: 'цене 🡻', sortProperty: 'price', order: 'asc' },
+    { name: 'цене 🡹', sortProperty: 'price', order: 'desc' },
+  ];
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
 
   const handleClickSelect = (item) => {
-    setSelected(item);
+    onChangeSort(item);
     setIsOpen(false);
   };
 
@@ -34,16 +41,16 @@ export default function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>{selected}</span>
+        <span>{value.name}</span>
       </div>
       <div className={styles.popup}>
         <ul>
-          {list.map((item, index) => (
+          {list.map((obj, index) => (
             <li
-              className={selected === item ? styles.active : ''}
+              className={value.name === obj.name ? styles.active : ''}
               key={index}
-              onClick={() => handleClickSelect(item)}>
-              {item}
+              onClick={() => handleClickSelect(obj)}>
+              {obj.name}
             </li>
           ))}
         </ul>

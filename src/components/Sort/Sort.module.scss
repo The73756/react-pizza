@@ -22,7 +22,7 @@
   margin-top: 15px;
   border-radius: 10px;
   padding: 10px 0;
-  width: 160px;
+  width: 100%;
   max-height: 0;
   box-shadow: 0 5px 15px rgb(0 0 0 / 9%);
   background: #fff;
@@ -48,7 +48,6 @@
   }
 
   @media (max-width: 576px) {
-    width: 100%;
     text-align: center;
   }
 }

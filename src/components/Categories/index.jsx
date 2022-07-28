@@ -1,9 +1,8 @@
 import styles from './Categories.module.scss';
 
-export default function Categories({ value, onClickCategory }) {
+export default function Categories({ value, onChangeCategory }) {
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
-  console.log(value);
   return (
     <div className={styles.categories}>
       <ul>
@@ -11,7 +10,7 @@ export default function Categories({ value, onClickCategory }) {
           <li
             key={index}
             className={value === index ? styles.active : ''}
-            onClick={() => onClickCategory(index)}>
+            onClick={() => onChangeCategory(index)}>
             {category}
           </li>
         ))}
