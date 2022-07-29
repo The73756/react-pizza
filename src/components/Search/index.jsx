@@ -6,14 +6,22 @@ export default function Search({ searchValue, setSearchValue }) {
   const [isInvalid, setIsInvalid] = useState(false);
 
   const handleChangeInput = (e) => {
-    if (e.target.value.indexOf(' ') === 0 || e.target.value.match(/[a-z]/gi)) {
+    let value = e.target.value;
+
+    if (value.match(/[a-z]/i)) {
       setIsInvalid(true);
-      e.target.value = '';
-    } else {
+    }
+
+    if (value.indexOf(' ') === 0) {
+      setIsInvalid(true);
+      value = '';
+    }
+
+    if (!value.match(/[a-z]/i) && !value.indexOf(' ') === 0) {
       setIsInvalid(false);
     }
 
-    const validatedSearchValue = e.target.value.replace(/[a-z]/gi, '');
+    const validatedSearchValue = value.replace(/[a-z]/gi, '');
     setSearchValue(validatedSearchValue);
   };
 

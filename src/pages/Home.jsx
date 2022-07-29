@@ -54,9 +54,13 @@ export default function Home({ searchValue }) {
         <Categories value={categoryId} onChangeCategory={setCategoryId} />
         <Sort value={sortType} onChangeSort={setSortType} />
       </div>
-      <h2 className='content__title'>Все пиццы</h2>
+      <h2 className='content__title'>{searchValue ? 'Поиск по: ' + searchValue : 'Все пиццы'}</h2>
       <div className='content__items'>{isLoading ? skeletons : elements}</div>
-      <Pagination onChangePage={(number) => setCurrentPage(number)} items={countItems} />
+      {elements.length === 0 && !isLoading ? (
+        'Пиццы не найдены'
+      ) : (
+        <Pagination onChangePage={(number) => setCurrentPage(number)} items={countItems} />
+      )}
     </>
   );
 }
