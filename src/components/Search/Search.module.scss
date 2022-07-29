@@ -1,0 +1,38 @@
+.wrapper {
+  position: relative;
+  flex: 1;
+  margin: 0 auto;
+  min-width: 250px;
+  max-width: 30%;
+
+  @media (max-width: 768px) {
+    margin: 0 15px;
+    max-width: 100%;
+  }
+
+  @media (max-width: 486px) {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.search {
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 12px;
+  padding: 12px 20px;
+  width: 100%;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: rgb(0 0 0 / 30%);
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 12px;
+  width: 20px;
+  height: 100%;
+  opacity: 0.5;
+}

@@ -10,9 +10,11 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
   const [sortType, setSortType] = useState({
-    name: 'популярности 🡻',
+    id: 0,
+    name: 'популярности',
+    reverseIcon: true,
     sortProperty: 'rating',
-    order: 'asc',
+    order: 'desc',
   });
 
   useEffect(() => {

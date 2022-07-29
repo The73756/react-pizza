@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+
+import Search from '../Search';
 import styles from './Header.module.scss';
 
 export default function Header() {
@@ -15,6 +17,7 @@ export default function Header() {
             <p>самая вкусная пицца во вселенной</p>
           </div>
         </Link>
+        <Search />
         {location !== '/cart' ? (
           <div className={styles.cart}>
             <Link to='cart' className='button button--cart'>
