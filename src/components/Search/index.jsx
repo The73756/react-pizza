@@ -1,12 +1,25 @@
+import { useState } from 'react';
+
 import styles from './Search.module.scss';
 
 export default function Search({ searchValue, setSearchValue }) {
+  const [isInvalid, setIsInvalid] = useState(false);
+
   const handleChangeInput = (e) => {
-    setSearchValue(e.target.value);
+    if (e.target.value.indexOf(' ') === 0 || e.target.value.match(/[a-z]/gi)) {
+      setIsInvalid(true);
+      e.target.value = '';
+    } else {
+      setIsInvalid(false);
+    }
+
+    const validatedSearchValue = e.target.value.replace(/[a-z]/gi, '');
+    setSearchValue(validatedSearchValue);
   };
 
   const clearInputs = () => {
     setSearchValue('');
+    setIsInvalid(false);
   };
 
   return (
@@ -31,10 +44,12 @@ export default function Search({ searchValue, setSearchValue }) {
       )}
       <input
         className={styles.search}
+        style={{ borderColor: isInvalid ? 'red' : 'rgba(0, 0, 0, 0.1)' }}
         placeholder='Поиск...'
         type='text'
         value={searchValue}
         onChange={handleChangeInput}
+        onBlur={() => setIsInvalid(false)}
       />
       <svg
         className={styles.icon}
