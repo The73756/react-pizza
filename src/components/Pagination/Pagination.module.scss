@@ -1,0 +1,45 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+.pagination {
+  margin-top: 50px;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid currentcolor;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    font-weight: 700;
+    color: #fe5f1e;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+
+    a {
+      padding: 13px 20px;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &:hover {
+      color: #fff;
+      background-color: #fe5f1e;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 30px;
+  }
+}
+
+:global {
+  .selected {
+    color: #fff !important;
+    background-color: #fe5f1e;
+  }
+}

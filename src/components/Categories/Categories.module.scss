@@ -28,11 +28,13 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1290px) {
     ul {
       margin-bottom: 20px;
     }
+  }
 
+  @media (max-width: 1024px) {
     li {
       margin-right: 0;
       margin-bottom: 5px;

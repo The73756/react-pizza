@@ -3,7 +3,6 @@ import styles from './Search.module.scss';
 export default function Search({ searchValue, setSearchValue }) {
   const handleChangeInput = (e) => {
     setSearchValue(e.target.value);
-    console.log(searchValue);
   };
 
   const clearInputs = () => {

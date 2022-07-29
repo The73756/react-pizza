@@ -4,11 +4,14 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import { Skeleton } from '../components/Pizza/Skeleton';
+import Pagination from '../components/Pagination';
 
 export default function Home({ searchValue }) {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [countItems, setCountItems] = useState(0);
   const [sortType, setSortType] = useState({
     id: 0,
     name: 'популярности',
@@ -18,32 +21,31 @@ export default function Home({ searchValue }) {
   });
 
   useEffect(() => {
+    const category = categoryId > 0 ? `category=${categoryId}&` : '';
+    const search = searchValue.trim() ? `&search=${searchValue.trim()}&` : '';
+
+    if (searchValue !== '') {
+      setCategoryId(0);
+    }
+
     try {
       setIsLoading(true);
       fetch(
-        `https://62dfc893976ae7460bf39a43.mockapi.io/items?${
-          categoryId > 0 ? `category=${categoryId}&` : ''
-        }&sortBy=${sortType.sortProperty}&order=${sortType.order}`,
+        `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortType.sortProperty}&order=${sortType.order}${search}`,
       )
         .then((res) => res.json())
         .then((json) => {
-          setItems(json);
+          setCountItems(json.count);
+          setItems(json.items);
           setIsLoading(false);
         });
     } catch (error) {
       alert('Ошибка при загрузке приложения!');
       console.error(error);
     }
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue, currentPage]);
 
-  const elements = items
-    .filter((obj) => {
-      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
-        return true;
-      }
-      return false;
-    })
-    .map((item) => <Pizza key={item.id} {...item} />);
+  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
   const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   return (
@@ -54,6 +56,7 @@ export default function Home({ searchValue }) {
       </div>
       <h2 className='content__title'>Все пиццы</h2>
       <div className='content__items'>{isLoading ? skeletons : elements}</div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} items={countItems} />
     </>
   );
 }
