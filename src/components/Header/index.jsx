@@ -1,10 +1,9 @@
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Search from '../Search';
 import styles from './Header.module.scss';
 
-export default function Header({ searchValue, setSearchValue }) {
+export default function Header() {
   const location = useLocation().pathname;
 
   return (
@@ -17,7 +16,7 @@ export default function Header({ searchValue, setSearchValue }) {
             <p>самая вкусная пицца во вселенной</p>
           </div>
         </Link>
-        <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+        <Search />
         {location !== '/cart' ? (
           <div className={styles.cart}>
             <Link to='cart' className='button button--cart'>
