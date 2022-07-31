@@ -54,7 +54,7 @@ export default function Search() {
       )}
       <input
         className={styles.search}
-        style={{ borderColor: isInvalid ? 'red' : 'rgba(0, 0, 0, 0.1)' }}
+        style={{ borderColor: isInvalid ? 'red' : '' }}
         placeholder='Поиск...'
         type='text'
         value={searchValue}

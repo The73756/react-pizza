@@ -1,18 +1,21 @@
 import { React, useState, useEffect, useContext } from 'react';
-import { SearchContext } from '../App';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
-import { Skeleton } from '../components/Pizza/Skeleton';
 import Pagination from '../components/Pagination';
+import { Skeleton } from '../components/Pizza/Skeleton';
+import { SearchContext } from '../App';
 
 export default function Home() {
-  const { searchValue } = useContext(SearchContext);
+  const dispatch = useDispatch();
+  const categoryId = useSelector((state) => state.filter.categoryId);
 
+  const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [countItems, setCountItems] = useState(0);
   const [sortType, setSortType] = useState({
@@ -23,12 +26,16 @@ export default function Home() {
     order: 'desc',
   });
 
+  const changeCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
+
   useEffect(() => {
     const category = categoryId > 0 ? `category=${categoryId}&` : '';
     const search = searchValue.trim() ? `&search=${searchValue.trim()}&` : '';
 
-    if (searchValue !== '') {
-      setCategoryId(0);
+    if (searchValue !== '' && categoryId > 0) {
+      changeCategory(0);
     }
 
     try {
@@ -54,7 +61,7 @@ export default function Home() {
   return (
     <>
       <div className='content__top'>
-        <Categories value={categoryId} onChangeCategory={setCategoryId} />
+        <Categories value={categoryId} onChangeCategory={changeCategory} />
         <Sort value={sortType} onChangeSort={setSortType} />
       </div>
       <h2 className='content__title'>{searchValue ? 'Поиск по: ' + searchValue : 'Все пиццы'}</h2>
