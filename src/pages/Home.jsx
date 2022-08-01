@@ -1,4 +1,5 @@
 import { React, useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
 
@@ -33,13 +34,13 @@ export default function Home() {
 
     try {
       setIsLoading(true);
-      fetch(
-        `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.sortProperty}&order=${sort.order}${search}`,
-      )
-        .then((res) => res.json())
-        .then((json) => {
-          setCountItems(json.count);
-          setItems(json.items);
+      axios
+        .get(
+          `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.sortProperty}&order=${sort.order}${search}`,
+        )
+        .then((res) => {
+          setCountItems(res.data.count);
+          setItems(res.data.items);
           setIsLoading(false);
         });
     } catch (error) {
