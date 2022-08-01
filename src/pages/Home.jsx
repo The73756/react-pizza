@@ -11,20 +11,13 @@ import { SearchContext } from '../App';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const categoryId = useSelector((state) => state.filter.categoryId);
+  const { categoryId, sort } = useSelector((state) => state.filter);
 
   const { searchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [countItems, setCountItems] = useState(0);
-  const [sortType, setSortType] = useState({
-    id: 0,
-    name: 'популярности',
-    reverseIcon: true,
-    sortProperty: 'rating',
-    order: 'desc',
-  });
 
   const changeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -41,7 +34,7 @@ export default function Home() {
     try {
       setIsLoading(true);
       fetch(
-        `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortType.sortProperty}&order=${sortType.order}${search}`,
+        `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.sortProperty}&order=${sort.order}${search}`,
       )
         .then((res) => res.json())
         .then((json) => {
@@ -53,7 +46,7 @@ export default function Home() {
       alert('Ошибка при загрузке приложения!');
       console.error(error);
     }
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sort, searchValue, currentPage]);
 
   const elements = items.map((item) => <Pizza key={item.id} {...item} />);
   const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
@@ -62,7 +55,7 @@ export default function Home() {
     <>
       <div className='content__top'>
         <Categories value={categoryId} onChangeCategory={changeCategory} />
-        <Sort value={sortType} onChangeSort={setSortType} />
+        <Sort />
       </div>
       <h2 className='content__title'>{searchValue ? 'Поиск по: ' + searchValue : 'Все пиццы'}</h2>
       <div className='content__items'>{isLoading ? skeletons : elements}</div>

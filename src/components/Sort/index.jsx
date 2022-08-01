@@ -1,25 +1,29 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../../redux/slices/filterSlice';
 
 import styles from './Sort.module.scss';
 
-export default function Sort({ value, onChangeSort }) {
-  const [isOpen, setIsOpen] = useState(false);
+const list = [
+  { id: 0, name: 'популярности', reverseIcon: true, sortProperty: 'rating', order: 'desc' },
+  { id: 1, name: 'популярности', sortProperty: 'rating', order: 'asc' },
+  { id: 2, name: 'алфавиту', sortProperty: 'title', order: 'asc' },
+  { id: 3, name: 'алфавиту', reverseIcon: true, sortProperty: 'title', order: 'desc' },
+  { id: 4, name: 'цене', sortProperty: 'price', order: 'asc' },
+  { id: 5, name: 'цене', reverseIcon: true, sortProperty: 'price', order: 'desc' },
+];
 
-  const list = [
-    { id: 0, name: 'популярности', reverseIcon: true, sortProperty: 'rating', order: 'desc' },
-    { id: 1, name: 'популярности', sortProperty: 'rating', order: 'asc' },
-    { id: 2, name: 'алфавиту', sortProperty: 'title', order: 'asc' },
-    { id: 3, name: 'алфавиту', reverseIcon: true, sortProperty: 'title', order: 'desc' },
-    { id: 4, name: 'цене', sortProperty: 'price', order: 'asc' },
-    { id: 5, name: 'цене', reverseIcon: true, sortProperty: 'price', order: 'desc' },
-  ];
+export default function Sort() {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filter.sort);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickSelect = (item) => {
-    onChangeSort(item);
+  const handleClickSelect = (obj) => {
+    dispatch(setSort(obj));
     setIsOpen(false);
   };
 
@@ -42,11 +46,11 @@ export default function Sort({ value, onChangeSort }) {
         </svg>
         <b>Сортировка по:</b>
         <span>
-          {value.name}
+          {sort.name}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className={styles.icon}
-            style={{ transform: `rotate(${value.reverseIcon ? 180 : 0}deg)` }}
+            style={{ transform: `rotate(${sort.reverseIcon ? 180 : 0}deg)` }}
             width='10'
             height='10'
             viewBox='0 0 464 464'>
@@ -61,7 +65,7 @@ export default function Sort({ value, onChangeSort }) {
         <ul>
           {list.map((obj, index) => (
             <li
-              className={value.id === obj.id ? styles.active : ''}
+              className={sort.id === obj.id ? styles.active : ''}
               key={index}
               onClick={() => handleClickSelect(obj)}>
               {obj.name}
