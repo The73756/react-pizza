@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 
 import styles from './Pagination.module.scss';
 
-export default function Pagination({ onChangePage, items }) {
+export default function Pagination({ onChangePage, items, currentPage }) {
   return (
     <ReactPaginate
       className={styles.pagination}
@@ -13,7 +13,8 @@ export default function Pagination({ onChangePage, items }) {
       pageRangeDisplayed={8}
       pageCount={items ? Math.ceil(items / 4) : 1}
       previousLabel='<'
-      renderOnZeroPageCount={null}
+      forcePage={currentPage - 1} //ибо мокапи начинает с 1, а нам надо с 0
+      renderOnZerocurrentPage={null}
     />
   );
 }
