@@ -1,17 +1,29 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef, useCallback } from 'react';
+import debounce from 'lodash.debounce';
 
 import { SearchContext } from '../../App';
 import styles from './Search.module.scss';
 
 export default function Search() {
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const { setSearchValue, localSearchValue, setLocalSearchValue } = useContext(SearchContext);
   const [isInvalid, setIsInvalid] = useState(false);
+  const inputRef = useRef(null);
 
-  const handleChangeInput = (e) => {
-    let value = e.target.value;
+  const updateSearchValue = useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 350),
+    [],
+  );
+
+  const onChangeInput = (event) => {
+    let value = event.target.value;
 
     if (value.match(/[a-z]/i)) {
       setIsInvalid(true);
+      value = value.replace(/[a-z]/gi, '');
+    } else {
+      setIsInvalid(false);
     }
 
     if (value.indexOf(' ') === 0) {
@@ -23,18 +35,20 @@ export default function Search() {
       setIsInvalid(false);
     }
 
-    const validatedSearchValue = value.replace(/[a-z]/gi, '');
-    setSearchValue(validatedSearchValue);
+    setLocalSearchValue(value);
+    updateSearchValue(value);
   };
 
   const clearInputs = () => {
+    setLocalSearchValue('');
     setSearchValue('');
     setIsInvalid(false);
+    inputRef.current.focus();
   };
 
   return (
     <div className={styles.wrapper}>
-      {searchValue && (
+      {localSearchValue && (
         <svg
           className={`${styles.icon} ${styles.iconClose}`}
           onClick={clearInputs}
@@ -53,12 +67,13 @@ export default function Search() {
         </svg>
       )}
       <input
+        ref={inputRef}
         className={styles.search}
         style={{ borderColor: isInvalid ? 'red' : '' }}
         placeholder='Поиск...'
         type='text'
-        value={searchValue}
-        onChange={handleChangeInput}
+        value={localSearchValue}
+        onChange={onChangeInput}
         onBlur={() => setIsInvalid(false)}
       />
       <svg

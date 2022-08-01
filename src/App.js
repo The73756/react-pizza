@@ -11,11 +11,13 @@ import './scss/app.scss';
 export const SearchContext = createContext('');
 
 function App() {
+  const [localSearchValue, setLocalSearchValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
 
   return (
     <div className='App'>
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
+      <SearchContext.Provider
+        value={{ searchValue, setSearchValue, localSearchValue, setLocalSearchValue }}>
         <div className='wrapper'>
           <Header />
           <div className='content'>

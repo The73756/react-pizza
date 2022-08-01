@@ -1,8 +1,8 @@
 import { React, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filterSlice';
 
+import { setCategoryId } from '../redux/slices/filterSlice';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
@@ -14,7 +14,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const { categoryId, sort } = useSelector((state) => state.filter);
 
-  const { searchValue } = useContext(SearchContext);
+  const { searchValue, localSearchValue } = useContext(SearchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,7 +58,9 @@ export default function Home() {
         <Categories value={categoryId} onChangeCategory={changeCategory} />
         <Sort />
       </div>
-      <h2 className='content__title'>{searchValue ? 'Поиск по: ' + searchValue : 'Все пиццы'}</h2>
+      <h2 className='content__title'>
+        {localSearchValue ? 'Поиск по: ' + localSearchValue : 'Все пиццы'}
+      </h2>
       <div className='content__items'>{isLoading ? skeletons : elements}</div>
       {elements.length === 0 && !isLoading ? (
         'Пиццы не найдены'

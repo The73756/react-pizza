@@ -16,7 +16,7 @@
     padding: 13px 30px;
     font-weight: 700;
     background-color: #f9f9f9;
-    transition: background-color 0.1s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
     cursor: pointer;
 
     &:hover {
@@ -53,4 +53,13 @@
 .active {
   color: #fff;
   background-color: #282828 !important;
+}
+
+.disabled {
+  background-color: #f3f1f1 !important;
+  cursor: default !important;
+
+  &:hover {
+    background-color: #f3f1f1 !important;
+  }
 }
