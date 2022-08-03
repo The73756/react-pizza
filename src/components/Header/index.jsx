@@ -1,9 +1,12 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Search from '../Search';
 import styles from './Header.module.scss';
 
 export default function Header() {
+  const {items, totalPrice} = useSelector((state) => state.cart);
+
   const location = useLocation().pathname;
 
   return (
@@ -20,10 +23,10 @@ export default function Header() {
         {location !== '/cart' ? (
           <div className={styles.cart}>
             <Link to='cart' className='button button--cart'>
-              <span className={styles.price}>520 ₽</span>
+              <span className={styles.price}>{totalPrice} ₽</span>
               <span className='button__delimiter'></span>
               <span className={styles.cart}>
-                3
+                {items.length}
                 <svg
                   width='18'
                   height='18'

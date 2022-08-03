@@ -19,7 +19,6 @@ export default function Sort() {
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef();
 
-  console.log(sortRef.current);
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
@@ -32,7 +31,6 @@ export default function Sort() {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.path.includes(sortRef.current)) {
-        console.log(e.path);
         setIsOpen(false);
       }
     };

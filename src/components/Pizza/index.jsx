@@ -1,10 +1,30 @@
 import { useState } from 'react';
 import styles from './Pizza.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default function Pizza({ id, title, price, imageUrl, sizes, types, rating, category }) {
+import { addItem } from '../../redux/slices/cartSlice';
+
+export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id));
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
+
+  const addedCount = cartItem ? cartItem.count : 0;
+
   const typeNames = ['тонкое', 'традиционное'];
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      type: typeNames[activeType],
+      size: activeSize,
+    };
+    dispatch(addItem(item));
+  };
 
   return (
     <div className={styles.pizza}>
@@ -34,7 +54,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, rating
       </div>
       <div className={styles.bottom}>
         <div className={styles.price}>от {price} ₽</div>
-        <button className='button button--outline button--add'>
+        <button className='button button--outline button--add' onClick={onClickAdd}>
           <svg
             width='12'
             height='12'
@@ -47,7 +67,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, rating
             />
           </svg>
           <span>Добавить</span>
-          <i>0</i>
+          {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>
