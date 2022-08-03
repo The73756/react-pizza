@@ -2,7 +2,7 @@ import { React, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage, currentPage } from '../redux/slices/filterSlice';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
@@ -21,6 +21,7 @@ export default function Home() {
 
   const changeCategory = (id) => {
     dispatch(setCategoryId(id));
+    currentPage !== 1 && dispatch(setCurrentPage(1));
   };
 
   const onChangePage = (number) => {
