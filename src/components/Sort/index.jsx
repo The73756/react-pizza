@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../redux/slices/filterSlice';
 
@@ -17,7 +17,9 @@ export default function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
   const [isOpen, setIsOpen] = useState(false);
+  const sortRef = useRef();
 
+  console.log(sortRef.current);
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
@@ -27,12 +29,19 @@ export default function Sort() {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    document.body.addEventListener('click', (e) => {
+      if (!e.path.includes(sortRef.current)) {
+        console.log(e.path);
+        setIsOpen(false);
+      }
+    });
+  }, []);
+
   return (
-    <button
-      className={`${styles.sort} ${isOpen ? styles.open : ''}`}
-      onClick={handleClickPopup}
-      onBlur={() => setIsOpen(false)}>
-      <div className={styles.label}>
+    <div ref={sortRef} className={`${styles.sort} ${isOpen ? styles.open : ''}`}>
+      <button onClick={handleClickPopup} className={styles.label}>
+        {' '}
         <svg
           width='10'
           height='6'
@@ -60,7 +69,7 @@ export default function Sort() {
               data-original='#000000'></path>
           </svg>
         </span>
-      </div>
+      </button>
       <div className={styles.popup}>
         <ul>
           {list.map((obj, index) => (
@@ -85,6 +94,6 @@ export default function Sort() {
           ))}
         </ul>
       </div>
-    </button>
+    </div>
   );
 }
