@@ -30,12 +30,16 @@ export default function Sort() {
   };
 
   useEffect(() => {
-    document.body.addEventListener('click', (e) => {
+    const handleClickOutside = (e) => {
       if (!e.path.includes(sortRef.current)) {
         console.log(e.path);
         setIsOpen(false);
       }
-    });
+    };
+
+    document.body.addEventListener('click', handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
 
   return (
