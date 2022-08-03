@@ -5,8 +5,8 @@ import Search from '../Search';
 import styles from './Header.module.scss';
 
 export default function Header() {
-  const {items, totalPrice} = useSelector((state) => state.cart);
-
+  const { items, totalPrice } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation().pathname;
 
   return (
@@ -26,7 +26,7 @@ export default function Header() {
               <span className={styles.price}>{totalPrice} ₽</span>
               <span className='button__delimiter'></span>
               <span className={styles.cart}>
-                {items.length}
+                {totalCount}
                 <svg
                   width='18'
                   height='18'

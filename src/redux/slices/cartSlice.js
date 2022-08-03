@@ -25,7 +25,14 @@ const cartSLice = createSlice({
       }, 0);
     },
     removeItem(state, action) {
-      state.items.filter((obj) => obj.id !== action.payload);
+      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+
+      if (findItem.count === 1) {
+        state.items = state.items.filter((obj) => obj.id !== action.payload.id);
+      } else if (findItem && findItem.count > 1) {
+        findItem.count--;
+      }
+      state.totalPrice -= findItem.price;
     },
     clearItems(state) {
       state.items = [];
