@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { plusItem, minusItem, clearItems } from '../../redux/slices/cartSlice';
-import styles from './CartBlock.module.scss';
+import { plusItem, minusItem } from '../../redux/slices/cartSlice';
+
+import styles from './Cart.module.scss';
 
 export default function CartItem({ id, title, type, size, price, imageUrl, count }) {
   const dispatch = useDispatch();

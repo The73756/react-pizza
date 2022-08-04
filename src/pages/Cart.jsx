@@ -1,11 +1,7 @@
 import React from 'react';
 
-import CartBlock from '../components/CartBlock';
+import CartBlock from '../components/Cart';
 
 export default function Cart() {
-  return (
-    <div className='container container--cart'>
-      <CartBlock />
-    </div>
-  );
+  return <CartBlock />;
 }

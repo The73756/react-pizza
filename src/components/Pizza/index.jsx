@@ -27,7 +27,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
   };
 
   return (
-    <div className={styles.pizza}>
+    <article className={styles.pizza}>
       <img className={styles.image} width={270} height={270} src={imageUrl} alt={title} />
       <h4 className={styles.title}>{title}</h4>
       <div className={styles.selector}>
@@ -70,6 +70,6 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
           {addedCount > 0 && <i>{addedCount}</i>}
         </button>
       </div>
-    </div>
+    </article>
   );
 }
