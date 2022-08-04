@@ -19,7 +19,7 @@ export default function CartItem({ id, title, type, size, price, imageUrl, count
   };
 
   return (
-    <div className={styles.item}>
+    <article className={styles.item}>
       <div className={styles.itemImg}>
         <img src={imageUrl} alt='Pizza' width={80} height={80} />
       </div>
@@ -91,6 +91,6 @@ export default function CartItem({ id, title, type, size, price, imageUrl, count
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

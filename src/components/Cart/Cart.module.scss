@@ -330,8 +330,8 @@
 }
 
 .cartEmpty {
-  margin: 0 auto;
-  max-width: 560px;
+  margin: 60px auto;
+  max-width: 620px;
   text-align: center;
 
   h2 {
@@ -344,12 +344,6 @@
     line-height: 145.4%;
     letter-spacing: 0.01em;
     color: #777;
-  }
-
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  icon {
-    position: relative;
-    top: 2px;
   }
 
   img {
