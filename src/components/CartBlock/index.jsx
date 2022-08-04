@@ -1,17 +1,24 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './CartBlock.module.scss';
 import CartItem from './CartItem';
+import { clearItems } from '../../redux/slices/cartSlice';
 
 export default function CartBlock() {
+  const dispatch = useDispatch();
   const { items, totalPrice } = useSelector((state) => state.cart);
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+
+  const onClickClear = () => {
+    dispatch(clearItems());
+  };
 
   return (
     <div className='cart'>
       <div className={styles.top}>
         <h2 className={styles.title}>Корзина</h2>
-        <div className={styles.clear}>
+        <button className={styles.clear} onClick={onClickClear}>
           <svg
             width='20'
             height='20'
@@ -48,7 +55,7 @@ export default function CartBlock() {
             />
           </svg>
           <span>Очистить корзину</span>
-        </div>
+        </button>
       </div>
       <div className={styles.items}>
         {items.map((item) => (
@@ -58,8 +65,8 @@ export default function CartBlock() {
       <div className={styles.bottom}>
         <div className={styles.bottomDetails}>
           <span>
-            Всего пицц:{' '}
-            <b>{+items.length > 0 ? items.length : 'Ну хоть одну то добавь, жмот бля!'}</b>
+            Всего пицц:
+            <b>{+totalCount > 0 ? ` ${totalCount}` : ' Кушац не хочется!?'}</b>
           </span>
           <span>
             Сумма заказа: <b>{totalPrice} ₽</b>

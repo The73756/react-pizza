@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './Pizza.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addItem } from '../../redux/slices/cartSlice';
+import { plusItem } from '../../redux/slices/cartSlice';
 
 export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
       type: typeNames[activeType],
       size: activeSize,
     };
-    dispatch(addItem(item));
+    dispatch(plusItem(item));
   };
 
   return (

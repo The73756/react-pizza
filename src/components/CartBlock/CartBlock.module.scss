@@ -37,6 +37,7 @@
 
 .clear {
   @include noselect;
+  @include btn-reset;
 
   display: flex;
   align-items: center;

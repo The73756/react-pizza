@@ -1,16 +1,20 @@
 import { useDispatch } from 'react-redux';
-import { addItem, removeItem } from '../../redux/slices/cartSlice';
+import { plusItem, minusItem, clearItems } from '../../redux/slices/cartSlice';
 import styles from './CartBlock.module.scss';
 
 export default function CartItem({ id, title, type, size, price, imageUrl, count }) {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    dispatch(addItem({ id }));
+    dispatch(plusItem({ id }));
   };
 
   const onClickMinus = () => {
-    dispatch(removeItem({ id }));
+    dispatch(minusItem({ id }));
+  };
+
+  const onClickRemove = () => {
+    dispatch(minusItem({ id, isFullRemove: true }));
   };
 
   return (
@@ -66,8 +70,9 @@ export default function CartItem({ id, title, type, size, price, imageUrl, count
       <div className={styles.itemPrice}>
         <b>{price * count} ₽</b>
         <div>
-          <button className='button button--outline button--circle' onClick={onClickPlus}>
+          <button className='button button--outline button--circle' onClick={onClickRemove}>
             <svg
+              style={{ transform: 'rotate(45deg)' }}
               width='10'
               height='10'
               viewBox='0 0 10 10'

@@ -8,7 +8,7 @@ export default function Search() {
   const { setSearchValue, localSearchValue, setLocalSearchValue } = useContext(SearchContext);
   const [isInvalid, setIsInvalid] = useState(false);
   const inputRef = useRef(null);
-
+  // eslint-disable-next-line
   const updateSearchValue = useCallback(
     debounce((str) => {
       setSearchValue(str);

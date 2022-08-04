@@ -51,6 +51,7 @@ export default function Home() {
       alert('Ошибка при загрузке приложения!');
       console.error(error);
     }
+    // eslint-disable-next-line
   }, [categoryId, sort, searchValue, currentPage]);
 
   const elements = items.map((item) => <Pizza key={item.id} {...item} />);
