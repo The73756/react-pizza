@@ -19,6 +19,9 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [countItems, setCountItems] = useState(0);
 
+  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
+  const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
+
   const changeCategory = (id) => {
     dispatch(setCategoryId(id));
     currentPage !== 1 && dispatch(setCurrentPage(1));
@@ -28,7 +31,9 @@ export default function Home() {
     dispatch(setCurrentPage(number));
   };
 
-  useEffect(() => {
+  const fetchItems = async () => {
+    setIsLoading(true);
+
     const category = categoryId > 0 ? `category=${categoryId}&` : '';
     const search = searchValue.trim() ? `&search=${searchValue.trim()}&` : '';
 
@@ -37,25 +42,23 @@ export default function Home() {
     }
 
     try {
-      setIsLoading(true);
-      axios
-        .get(
-          `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.sortProperty}&order=${sort.order}${search}`,
-        )
-        .then((res) => {
-          setCountItems(res.data.count);
-          setItems(res.data.items);
-          setIsLoading(false);
-        });
+      const res = await axios.get(
+        `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.sortProperty}&order=${sort.order}${search}`,
+      );
+
+      setCountItems(res.data.count);
+      setItems(res.data.items);
+      setIsLoading(false);
     } catch (error) {
       alert('Ошибка при загрузке приложения!');
       console.error(error);
     }
+  };
+
+  useEffect(() => {
+    fetchItems();
     // eslint-disable-next-line
   }, [categoryId, sort, searchValue, currentPage]);
-
-  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
-  const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   return (
     <>
