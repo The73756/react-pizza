@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import { setItems, setCountItems } from '../redux/slices/pizzaSlice';
+
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
@@ -13,14 +15,10 @@ import { SearchContext } from '../App';
 export default function Home() {
   const dispatch = useDispatch();
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const { items, countItems } = useSelector((state) => state.pizza);
 
   const { searchValue, localSearchValue } = useContext(SearchContext);
-  const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [countItems, setCountItems] = useState(0);
-
-  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
-  const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   const changeCategory = (id) => {
     dispatch(setCategoryId(id));
@@ -42,16 +40,17 @@ export default function Home() {
     }
 
     try {
-      const res = await axios.get(
+      const { data } = await axios.get(
         `https://62dfc893976ae7460bf39a43.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sort.sortProperty}&order=${sort.order}${search}`,
       );
 
-      setCountItems(res.data.count);
-      setItems(res.data.items);
-      setIsLoading(false);
+      dispatch(setCountItems(data.count));
+      dispatch(setItems(data.items));
     } catch (error) {
       alert('Ошибка при загрузке приложения!');
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -59,6 +58,9 @@ export default function Home() {
     fetchItems();
     // eslint-disable-next-line
   }, [categoryId, sort, searchValue, currentPage]);
+
+  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
+  const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   return (
     <>
