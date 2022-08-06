@@ -54,6 +54,24 @@ body {
     }
   }
 
+  &__error {
+    margin: 100px auto;
+    max-width: 620px;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 145.4%;
+      letter-spacing: 0.01em;
+      color: #777;
+    }
+  }
+
   @media (max-width: 576px) {
     padding: 20px 0;
   }

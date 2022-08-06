@@ -8,8 +8,8 @@ export const Skeleton = () => (
     className={styles.pizza}
     speed={2}
     width={280}
-    height={467}
-    viewBox='0 0 280 467'
+    height={465}
+    viewBox='0 0 280 465'
     backgroundColor='#f3f3f3'
     foregroundColor='#ecebeb'>
     <circle cx='134' cy='136' r='125' />
