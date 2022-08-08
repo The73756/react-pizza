@@ -74,11 +74,9 @@ export default function Home() {
         <div className='content__items'>{status === 'loading' ? skeletons : elements}</div>
       )}
 
-      {elements.length === 0 && status !== 'loading' && status !== 'error'
-        ? 'Пиццы не найдены'
-        : ''}
-
-      {status !== 'error' && elements.length !== 0 ? (
+      {elements.length === 0 && status === 'success' ? (
+        'Пиццы не найдены' // поиск не дал результатов
+      ) : status !== 'error' ? (
         <Pagination currentPage={currentPage} onChangePage={onChangePage} items={countItems} />
       ) : (
         ''
