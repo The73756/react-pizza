@@ -1,29 +1,33 @@
-import { React, useEffect, useContext } from 'react';
+import { React, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import {
+  selectFilter,
+  selectSearchValue,
+  setCategoryId,
+  setCurrentPage,
+} from '../redux/slices/filterSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Pagination from '../components/Pagination';
 import { Skeleton } from '../components/Pizza/Skeleton';
-import { SearchContext } from '../App';
 
 export default function Home() {
   const dispatch = useDispatch();
 
-  const { items, countItems, status } = useSelector((state) => state.pizza);
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
-  const { searchValue, localSearchValue } = useContext(SearchContext);
+  const { items, countItems, status } = useSelector(selectPizzaData);
+  const { categoryId, sort, currentPage } = useSelector(selectFilter);
+  const searchValue = useSelector(selectSearchValue);
 
   const changeCategory = (id) => {
     dispatch(setCategoryId(id));
     currentPage !== 1 && dispatch(setCurrentPage(1));
   };
 
-  const onChangePage = (number) => {
+  const сhangePage = (number) => {
     dispatch(setCurrentPage(number));
   };
 
@@ -36,6 +40,11 @@ export default function Home() {
     if (searchValue !== '' && categoryId > 0) {
       changeCategory(0);
     }
+    // эти две штуки отправляют лишний запрос.
+    if (searchValue !== '') {
+      сhangePage(1);
+    }
+
     dispatch(
       fetchPizzas({
         category,
@@ -61,9 +70,7 @@ export default function Home() {
         <Categories value={categoryId} onChangeCategory={changeCategory} />
         <Sort />
       </div>
-      <h2 className='content__title'>
-        {localSearchValue ? 'Поиск по: ' + localSearchValue : 'Все пиццы'}
-      </h2>
+      <h2 className='content__title'>{searchValue ? 'Поиск по: ' + searchValue : 'Все пиццы'}</h2>
 
       {status === 'error' ? (
         <div className='content__error'>
@@ -77,7 +84,7 @@ export default function Home() {
       {elements.length === 0 && status === 'success' ? (
         'Пиццы не найдены' // поиск не дал результатов
       ) : status !== 'error' ? (
-        <Pagination currentPage={currentPage} onChangePage={onChangePage} items={countItems} />
+        <Pagination currentPage={currentPage} onChangePage={сhangePage} items={countItems} />
       ) : (
         ''
       )}

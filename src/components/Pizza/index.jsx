@@ -2,11 +2,11 @@ import { useState } from 'react';
 import styles from './Pizza.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { plusItem } from '../../redux/slices/cartSlice';
+import { selectCartItemById, plusItem } from '../../redux/slices/cartSlice';
 
 export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => state.cart.items.find((item) => item.id === id));
+  const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 

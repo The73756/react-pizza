@@ -1,11 +1,11 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import { selectSearchValue } from '../../redux/slices/filterSlice';
 
 import styles from './Categories.module.scss';
-import { SearchContext } from '../../App';
 
 export default function Categories({ value, onChangeCategory }) {
+  const searchValue = useSelector(selectSearchValue);
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-  const { searchValue } = useContext(SearchContext);
 
   return (
     <div className={styles.categories}>

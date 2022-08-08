@@ -1,17 +1,19 @@
-import { useState, useContext, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSearchValue } from '../../redux/slices/filterSlice';
 import debounce from 'lodash.debounce';
 
-import { SearchContext } from '../../App';
 import styles from './Search.module.scss';
 
 export default function Search() {
-  const { setSearchValue, localSearchValue, setLocalSearchValue } = useContext(SearchContext);
+  const dispatch = useDispatch();
+  const [localSearchValue, setLocalSearchValue] = useState('');
   const [isInvalid, setIsInvalid] = useState(false);
   const inputRef = useRef(null);
   // eslint-disable-next-line
   const updateSearchValue = useCallback(
     debounce((str) => {
-      setSearchValue(str);
+      dispatch(setSearchValue(str));
     }, 350),
     [],
   );
@@ -41,7 +43,7 @@ export default function Search() {
 
   const clearInputs = () => {
     setLocalSearchValue('');
-    setSearchValue('');
+    dispatch(setSearchValue(''));
     setIsInvalid(false);
     inputRef.current.focus();
   };
