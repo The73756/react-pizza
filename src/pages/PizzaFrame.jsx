@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Pizza from '../components/Pizza';
 import { Skeleton } from '../components/Pizza/Skeleton';
 
 import axios from 'axios';
@@ -25,18 +26,7 @@ export default function PizzaFrame() {
   }, [id]);
 
   if (pizza) {
-    return (
-      <div>
-        <img src={pizza.imageUrl} alt='' />
-        <h2>{pizza.title}</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa at aperiam illo! Earum
-          voluptas corporis sunt! Nihil, exercitationem? Sed libero exercitationem esse voluptatum
-          dignissimos molestias asperiores ab debitis itaque quod.
-        </p>
-        <h4>{pizza.price} ₽</h4>
-      </div>
-    );
+    return <Pizza {...pizza} isFrame />;
   } else {
     return <Skeleton />;
   }
