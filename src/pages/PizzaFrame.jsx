@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Skeleton } from '../components/Pizza/Skeleton';
 
 import axios from 'axios';
@@ -7,6 +7,7 @@ import axios from 'axios';
 export default function PizzaFrame() {
   const [pizza, setPizza] = useState();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPizza = async () => {
@@ -16,6 +17,7 @@ export default function PizzaFrame() {
       } catch (error) {
         alert('Ошибка при загрузке данных');
         console.error(error);
+        navigate('/');
       }
     };
 
