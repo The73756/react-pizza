@@ -64,8 +64,8 @@ export default function CartBlock() {
           </button>
         </div>
         <div className={styles.items}>
-          {items.map((item) => (
-            <CartItem key={item.id} {...item} />
+          {items.map((item, index) => (
+            <CartItem key={`${item.id}${index}`} {...item} />
           ))}
         </div>
         <div className={styles.bottom}>

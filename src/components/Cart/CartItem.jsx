@@ -7,15 +7,15 @@ export default function CartItem({ id, title, type, size, price, imageUrl, count
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    dispatch(plusItem({ id }));
+    dispatch(plusItem({ id, size, type }));
   };
 
   const onClickMinus = () => {
-    dispatch(minusItem({ id }));
+    dispatch(minusItem({ id, size, type }));
   };
 
   const onClickRemove = () => {
-    dispatch(minusItem({ id, isFullRemove: true }));
+    dispatch(minusItem({ id, size, type, isFullRemove: true }));
   };
 
   return (
