@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Pizza.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { selectCartItemById, plusItem } from '../../redux/slices/cartSlice';
 
@@ -28,8 +29,10 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types }) {
 
   return (
     <article className={styles.pizza}>
-      <img className={styles.image} width={270} height={270} src={imageUrl} alt={title} />
-      <h4 className={styles.title}>{title}</h4>
+      <Link to={`pizza/${id}`}>
+        <img className={styles.image} width={270} height={270} src={imageUrl} alt={title} />
+        <h4 className={styles.title}>{title}</h4>
+      </Link>
       <div className={styles.selector}>
         <ul>
           {types.map((typeId, index) => (
