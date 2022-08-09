@@ -5,6 +5,8 @@ import Search from '../Search';
 import styles from './Header.module.scss';
 import { selectCart } from '../../redux/slices/cartSlice';
 
+import logo from './pizza-logo.svg';
+
 export default function Header() {
   const { items, totalPrice } = useSelector(selectCart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
@@ -14,7 +16,7 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.container}>
         <Link to='/' className={styles.logo}>
-          <img width='38' src='./img/pizza-logo.svg' alt='Pizza logo' />
+          <img width='38' src={logo} alt='Pizza logo' />
           <div>
             <h1>React Pizza</h1>
             <p>самая вкусная пицца во вселенной</p>

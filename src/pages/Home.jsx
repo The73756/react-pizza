@@ -1,5 +1,6 @@
 import { React, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
   selectFilter,
@@ -61,7 +62,11 @@ export default function Home() {
     // eslint-disable-next-line
   }, [categoryId, sort, searchValue, currentPage]);
 
-  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
+  const elements = items.map((item) => (
+    <Link key={item.id} to={`pizza/${item.id}`}>
+      <Pizza {...item} />
+    </Link>
+  ));
   const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   return (
