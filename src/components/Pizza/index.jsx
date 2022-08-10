@@ -11,7 +11,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, isFram
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
-  const addedCount = cartItem ? cartItem.count : 0;
+  const addedCount = cartItem.reduce((sum, item) => sum + item.count, 0);
 
   const typeNames = ['тонкое', 'традиционное'];
 
