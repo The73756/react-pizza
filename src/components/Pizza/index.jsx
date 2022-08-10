@@ -15,15 +15,21 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, isFram
 
   const typeNames = ['тонкое', 'традиционное'];
 
+  const typеFactors = [1, 1.25];
+  const sizeFactors = [1, 1.2, 1.6];
+
+  const item = {
+    id,
+    title,
+    price: Math.round(price * typеFactors[activeType] * sizeFactors[activeSize]),
+    imageUrl,
+    type: typeNames[activeType],
+    typeFactor: typеFactors[activeType],
+    size: sizes[activeSize],
+    sizeFactor: sizeFactors[activeSize],
+  };
+
   const onClickAdd = () => {
-    const item = {
-      id,
-      title,
-      price,
-      imageUrl,
-      type: typeNames[activeType],
-      size: sizes[activeSize],
-    };
     dispatch(plusItem(item));
   };
 
@@ -57,7 +63,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, isFram
           </ul>
         </div>
         <div className={styles.bottom}>
-          <div className={styles.price}>от {price} ₽</div>
+          <div className={styles.price}>от {item.price} ₽</div>
           <button className='button button--outline button--add' onClick={onClickAdd}>
             <svg
               width='12'
@@ -104,7 +110,7 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, isFram
             </ul>
           </div>
           <div className={styles.bottom}>
-            <div className={styles.price}>от {price} ₽</div>
+            <div className={styles.price}>от {item.price} ₽</div>
             <button className='button button--outline button--add' onClick={onClickAdd}>
               <svg
                 width='12'

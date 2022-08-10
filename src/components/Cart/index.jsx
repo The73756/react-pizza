@@ -72,7 +72,7 @@ export default function CartBlock() {
           <div className={styles.bottomDetails}>
             <span>
               Всего пицц:
-              <b>{totalCount}</b>
+              <b>{' ' + totalCount}</b>
             </span>
             <span>
               Сумма заказа: <b>{totalPrice} ₽</b>
