@@ -134,6 +134,9 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, isFram
             Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
             Свой даль рекламных, рыбного запятой букв сбить коварный выйти повстречался?
           </p>
+          <Link to='/' className={`button ${styles.buttonBack}`}>
+            <span>Вернуться назад</span>
+          </Link>
         </div>
       </article>
     );
