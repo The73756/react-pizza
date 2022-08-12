@@ -4,26 +4,34 @@ import { selectSort, setSort } from '../../redux/slices/filterSlice';
 
 import styles from './Sort.module.scss';
 
-const list = [
+type SortItem = {
+  id: number;
+  name: string;
+  reverseIcon: boolean;
+  sortProperty: string;
+  order: 'asc' | 'desc';
+};
+
+const sortList: SortItem[] = [
   { id: 0, name: 'популярности', reverseIcon: true, sortProperty: 'rating', order: 'desc' },
-  { id: 1, name: 'популярности', sortProperty: 'rating', order: 'asc' },
-  { id: 2, name: 'алфавиту', sortProperty: 'title', order: 'asc' },
+  { id: 1, name: 'популярности', reverseIcon: false, sortProperty: 'rating', order: 'asc' },
+  { id: 2, name: 'алфавиту', reverseIcon: false, sortProperty: 'title', order: 'asc' },
   { id: 3, name: 'алфавиту', reverseIcon: true, sortProperty: 'title', order: 'desc' },
-  { id: 4, name: 'цене', sortProperty: 'price', order: 'asc' },
+  { id: 4, name: 'цене', reverseIcon: false, sortProperty: 'price', order: 'asc' },
   { id: 5, name: 'цене', reverseIcon: true, sortProperty: 'price', order: 'desc' },
 ];
 
-export default function Sort() {
+const Sort = () => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
   const [isOpen, setIsOpen] = useState(false);
-  const sortRef = useRef();
+  const sortRef = useRef(null);
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleClickSelect = (obj) => {
+  const handleClickSelect = (obj: SortItem) => {
     dispatch(setSort(obj));
     setIsOpen(false);
   };
@@ -74,7 +82,7 @@ export default function Sort() {
       </button>
       <div className={styles.popup}>
         <ul>
-          {list.map((obj, index) => (
+          {sortList.map((obj, index) => (
             <li
               className={sort.id === obj.id ? styles.active : ''}
               key={index}
@@ -98,4 +106,6 @@ export default function Sort() {
       </div>
     </div>
   );
-}
+};
+
+export default Sort;

@@ -5,7 +5,7 @@ import { Skeleton } from '../components/Pizza/Skeleton';
 
 import axios from 'axios';
 
-export default function PizzaFrame(): JSX.Element {
+const PizzaFrame: React.FC = () => {
   const [pizza, setPizza] = useState<{
     imageUrl: string;
     title: string;
@@ -37,4 +37,6 @@ export default function PizzaFrame(): JSX.Element {
   } else {
     return <Skeleton />;
   }
-}
+};
+
+export default PizzaFrame;

@@ -5,11 +5,11 @@ import Search from '../Search';
 import styles from './Header.module.scss';
 import { selectCart } from '../../redux/slices/cartSlice';
 
-import logo from './pizza-logo.svg';
+import logo from '../../assets/img/pizza-logo.svg';
 
-export default function Header() {
+const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0); // потом пофиксим any
   const location = useLocation().pathname;
 
   return (
@@ -69,4 +69,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;
