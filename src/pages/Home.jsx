@@ -13,7 +13,7 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Pagination from '../components/Pagination';
-import { Skeleton } from '../components/Pizza/Skeleton';
+import Skeleton  from '../components/Pizza/Skeleton';
 
 export default function Home() {
   const dispatch = useDispatch();

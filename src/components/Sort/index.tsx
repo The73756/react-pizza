@@ -25,7 +25,7 @@ const Sort = () => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
   const [isOpen, setIsOpen] = useState(false);
-  const sortRef = useRef(null);
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
@@ -37,7 +37,7 @@ const Sort = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handleClickOutside = (e: any) => {
       if (!e.path.includes(sortRef.current)) {
         setIsOpen(false);
       }

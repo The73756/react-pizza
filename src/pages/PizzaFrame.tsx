@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Pizza from '../components/Pizza';
-import { Skeleton } from '../components/Pizza/Skeleton';
+import Skeleton from '../components/Pizza/Skeleton';
 
 import axios from 'axios';
 
@@ -11,8 +11,8 @@ const PizzaFrame: React.FC = () => {
     title: string;
     price: number;
     id: string;
-    sizes: [];
-    types: [];
+    sizes: number[];
+    types: number[];
   }>();
   const { id } = useParams();
   const navigate = useNavigate();

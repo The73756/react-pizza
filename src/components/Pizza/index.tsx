@@ -5,16 +5,33 @@ import { Link } from 'react-router-dom';
 
 import { selectCartItemById, plusItem } from '../../redux/slices/cartSlice';
 
-export default function Pizza({ id, title, price, imageUrl, sizes, types, isFrame = false }) {
+type PizzaProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  isFrame: boolean;
+};
+
+const Pizza: React.FC<PizzaProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+  isFrame = false,
+}) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
-  const addedCount = cartItem.reduce((sum, item) => sum + item.count, 0);
+  const addedCount = cartItem.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const typeNames = ['тонкое', 'традиционное'];
-
   const typеFactors = [1, 1.25];
   const sizeFactors = [1, 1.2, 1.6];
 
@@ -141,4 +158,6 @@ export default function Pizza({ id, title, price, imageUrl, sizes, types, isFram
       </article>
     );
   }
-}
+};
+
+export default Pizza;

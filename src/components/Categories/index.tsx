@@ -3,7 +3,12 @@ import { selectSearchValue } from '../../redux/slices/filterSlice';
 
 import styles from './Categories.module.scss';
 
-export default function Categories({ value, onChangeCategory }) {
+type CategoriesProps = {
+  value: number;
+  onChangeCategory: Function;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
   const searchValue = useSelector(selectSearchValue);
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
@@ -16,11 +21,13 @@ export default function Categories({ value, onChangeCategory }) {
             className={`${value === index ? styles.active : ''}${
               value !== index && searchValue ? styles.disabled : ''
             }`}
-            onClick={!searchValue ? () => onChangeCategory(index) : null}>
+            onClick={!searchValue ? () => onChangeCategory(index) : undefined}>
             {category}
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default Categories;

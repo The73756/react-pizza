@@ -1,6 +1,6 @@
 import styles from './NotFoundBlock.module.scss';
 
-export default function NotFound() {
+const NotFound: React.FC = () => {
   return (
     <div className={styles.notFound}>
       <h1>
@@ -10,4 +10,5 @@ export default function NotFound() {
       <p className={styles.descr}>Ой! Вы куда то не туда жмали!</p>
     </div>
   );
-}
+};
+export default NotFound;

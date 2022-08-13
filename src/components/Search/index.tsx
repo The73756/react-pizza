@@ -5,11 +5,12 @@ import debounce from 'lodash.debounce';
 
 import styles from './Search.module.scss';
 
-export default function Search() {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
   const [localSearchValue, setLocalSearchValue] = useState('');
   const [isInvalid, setIsInvalid] = useState(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   // eslint-disable-next-line
   const updateSearchValue = useCallback(
     debounce((str) => {
@@ -18,7 +19,7 @@ export default function Search() {
     [],
   );
 
-  const onChangeInput = (event) => {
+  const onChangeInput = (event: any) => {
     let value = event.target.value;
 
     if (value.match(/[a-z]/i)) {
@@ -33,7 +34,7 @@ export default function Search() {
       value = '';
     }
 
-    if (!value.match(/[a-z]/i) && !value.indexOf(' ') === 0) {
+    if (!value.match(/[a-z]/i) && !(value.indexOf(' ') === 0)) {
       setIsInvalid(false);
     }
 
@@ -45,7 +46,8 @@ export default function Search() {
     setLocalSearchValue('');
     dispatch(setSearchValue(''));
     setIsInvalid(false);
-    inputRef.current.focus();
+
+    inputRef.current?.focus();
   };
 
   return (
@@ -89,4 +91,6 @@ export default function Search() {
       </svg>
     </div>
   );
-}
+};
+
+export default Search;

@@ -6,10 +6,10 @@ import CartItem from './CartItem';
 import CartEmpty from './CartEmpty';
 import { clearItems, selectCart } from '../../redux/slices/cartSlice';
 
-export default function CartBlock() {
+const CartBlock: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onClickClear = () => {
     dispatch(clearItems());
@@ -64,7 +64,7 @@ export default function CartBlock() {
           </button>
         </div>
         <div className={styles.items}>
-          {items.map((item, index) => (
+          {items.map((item: any, index: number) => (
             <CartItem key={`${item.id}${index}`} {...item} />
           ))}
         </div>
@@ -105,4 +105,6 @@ export default function CartBlock() {
       </div>
     </div>
   );
-}
+};
+
+export default CartBlock;
