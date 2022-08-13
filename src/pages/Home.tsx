@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -13,22 +13,22 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Pagination from '../components/Pagination';
-import Skeleton  from '../components/Pizza/Skeleton';
+import Skeleton from '../components/Pizza/Skeleton';
 
-export default function Home() {
+const Home: React.FC = () => {
   const dispatch = useDispatch();
 
   const { items, countItems, status } = useSelector(selectPizzaData);
   const { categoryId, sort, currentPage } = useSelector(selectFilter);
   const searchValue = useSelector(selectSearchValue);
 
-  const changeCategory = (id) => {
-    dispatch(setCategoryId(id));
+  const changeCategory = (index: number) => {
+    dispatch(setCategoryId(index));
     currentPage !== 1 && dispatch(setCurrentPage(1));
   };
 
-  const сhangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const сhangePage = (pageNumber: number) => {
+    dispatch(setCurrentPage(pageNumber));
   };
 
   const getItems = () => {
@@ -46,6 +46,7 @@ export default function Home() {
     }
 
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         category,
         search,
@@ -61,7 +62,7 @@ export default function Home() {
     // eslint-disable-next-line
   }, [categoryId, sort, searchValue, currentPage]);
 
-  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
+  const elements = items.map((item: any) => <Pizza key={item.id} {...item} />);
   const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   return (
@@ -90,4 +91,6 @@ export default function Home() {
       )}
     </>
   );
-}
+};
+
+export default Home;
