@@ -21,7 +21,7 @@ const sortList: SortItem[] = [
   { id: 5, name: 'цене', reverseIcon: true, sortProperty: 'price', order: 'desc' },
 ];
 
-const Sort = () => {
+const Sort: React.FC = () => {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
   const [isOpen, setIsOpen] = useState(false);
