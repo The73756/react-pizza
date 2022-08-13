@@ -34,7 +34,7 @@ const Search: React.FC = () => {
       value = '';
     }
 
-    if (!value.match(/[a-z]/i) && !(value.indexOf(' ') === 0)) {
+    if (!value.match(/[a-z]/i) && value.indexOf(' ') === 1) {
       setIsInvalid(false);
     }
 
