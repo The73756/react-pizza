@@ -10,8 +10,8 @@ export type CartItem = {
   price: number;
   imageUrl: string;
   count: number;
-  typeFactor: number;
-  sizeFactor: number;
+  typeFactor?: number;
+  sizeFactor?: number;
   isFullRemove?: boolean;
 };
 

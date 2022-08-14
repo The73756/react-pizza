@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-type Pizza = {
+export type Pizza = {
   id: string;
   title: string;
   price: number;
@@ -12,9 +12,17 @@ type Pizza = {
   isFrame: boolean;
 };
 
+type fetchPizzasArgh = {
+  category: string;
+  search: string;
+  currentPage: number;
+  sortOrder: string;
+  sortProperty: string;
+};
+
 export const fetchPizzas = createAsyncThunk(
   'pizza/fetchPizzasStatus',
-  async (params: Record<string, string>) => {
+  async (params: fetchPizzasArgh) => {
     const { category, search, currentPage, sortOrder, sortProperty } = params;
 
     const { data } = await axios.get(
