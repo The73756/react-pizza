@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
   selectFilter,
   selectSearchValue,
   setCategoryId,
-  setCurrentPage
+  setCurrentPage,
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import { useAppDispatch } from '../redux/store';
@@ -23,10 +23,10 @@ const Home: React.FC = () => {
   const { categoryId, sort, currentPage } = useSelector(selectFilter);
   const searchValue = useSelector(selectSearchValue);
 
-  const changeCategory = (index: number) => {
+  const changeCategory = useCallback((index: number) => {
     dispatch(setCategoryId(index));
     currentPage !== 1 && dispatch(setCurrentPage(1));
-  };
+  }, []);
 
   const сhangePage = (pageNumber: number) => {
     dispatch(setCurrentPage(pageNumber));
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
     <>
       <div className='content__top'>
         <Categories value={categoryId} onChangeCategory={changeCategory} />
-        <Sort />
+        <Sort value={sort} />
       </div>
       <h2 className='content__title'>{searchValue ? 'Поиск по: ' + searchValue : 'Все пиццы'}</h2>
 

@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectSort, setSort } from '../../redux/slices/filterSlice';
+import { useState, useEffect, useRef, memo } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSort } from '../../redux/slices/filterSlice';
 
 import styles from './Sort.module.scss';
 
@@ -12,6 +12,10 @@ type SortItem = {
   order: 'asc' | 'desc';
 };
 
+type SortProps = {
+  value: SortItem;
+};
+
 const sortList: SortItem[] = [
   { id: 0, name: 'популярности', reverseIcon: true, sortProperty: 'rating', order: 'desc' },
   { id: 1, name: 'популярности', reverseIcon: false, sortProperty: 'rating', order: 'asc' },
@@ -21,9 +25,8 @@ const sortList: SortItem[] = [
   { id: 5, name: 'цене', reverseIcon: true, sortProperty: 'price', order: 'desc' },
 ];
 
-const Sort: React.FC = () => {
+const Sort: React.FC<SortProps> = memo(({ value }) => {
   const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
@@ -65,11 +68,11 @@ const Sort: React.FC = () => {
         </svg>
         <b>Сортировка по:</b>
         <span>
-          {sort.name}
+          {value.name}
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className={styles.icon}
-            style={{ transform: `rotate(${sort.reverseIcon ? 180 : 0}deg)` }}
+            style={{ transform: `rotate(${value.reverseIcon ? 180 : 0}deg)` }}
             width='10'
             height='10'
             viewBox='0 0 464 464'>
@@ -84,7 +87,7 @@ const Sort: React.FC = () => {
         <ul>
           {sortList.map((obj, index) => (
             <li
-              className={sort.id === obj.id ? styles.active : ''}
+              className={value.id === obj.id ? styles.active : ''}
               key={index}
               onClick={() => handleClickSelect(obj)}>
               {obj.name}
@@ -106,6 +109,6 @@ const Sort: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Sort;
