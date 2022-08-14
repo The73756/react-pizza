@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/filterSlice';
 import debounce from 'lodash.debounce';
@@ -19,7 +19,7 @@ const Search: React.FC = () => {
     [],
   );
 
-  const onChangeInput = (event: any) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
 
     if (value.match(/[a-z]/i)) {
@@ -42,7 +42,7 @@ const Search: React.FC = () => {
     updateSearchValue(value);
   };
 
-  const clearInputs = () => {
+  const clearInputs = (event: React.MouseEvent<SVGSVGElement>) => {
     setLocalSearchValue('');
     dispatch(setSearchValue(''));
     setIsInvalid(false);

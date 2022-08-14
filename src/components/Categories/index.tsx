@@ -5,12 +5,13 @@ import styles from './Categories.module.scss';
 
 type CategoriesProps = {
   value: number;
-  onChangeCategory: Function;
+  onChangeCategory: (index: number) => void;
 };
+
+const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 const Categories: React.FC<CategoriesProps> = ({ value, onChangeCategory }) => {
   const searchValue = useSelector(selectSearchValue);
-  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
   return (
     <div className={styles.categories}>
