@@ -1,7 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { calcTotalPrice } from '../../utils/cartTotalPrice';
+import { RootState } from '../store';
 
-const initialState = {
+export type CartItem = {
+  id: string;
+  title: string;
+  type: string;
+  size: number;
+  price: number;
+  imageUrl: string;
+  count: number;
+  typeFactor: number;
+  sizeFactor: number;
+  isFullRemove?: boolean;
+};
+
+interface CartSliceState {
+  totalPrice: number;
+  items: CartItem[];
+}
+
+const initialState: CartSliceState = {
   totalPrice: 0,
   items: [],
 };
@@ -11,7 +30,7 @@ const cartSLice = createSlice({
   initialState,
   reducers: {
     //не знаю как избавиться от дублирования кода в поиске элемента :(
-    plusItem(state, action) {
+    plusItem(state, action: PayloadAction<CartItem>) {
       const findItem = state.items.find((obj) => {
         return (
           obj.id === action.payload.id &&
@@ -32,7 +51,7 @@ const cartSLice = createSlice({
       state.totalPrice = calcTotalPrice(state.items);
     },
 
-    minusItem(state, action) {
+    minusItem(state, action: PayloadAction<CartItem>) {
       const findItem = state.items.find((obj) => {
         return (
           obj.id === action.payload.id &&
@@ -58,10 +77,9 @@ const cartSLice = createSlice({
   },
 });
 
-export const selectCart = (state) => state.cart;
-export const selectCartItemById = (id) => (state) =>
+export const selectCart = (state: RootState) => state.cart;
+export const selectCartItemById = (id: string) => (state: RootState) =>
   state.cart.items.filter((item) => item.id === id);
-
 export const { plusItem, minusItem, clearItems } = cartSLice.actions;
 
 export default cartSLice.reducer;

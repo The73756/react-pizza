@@ -3,7 +3,7 @@ import styles from './Pizza.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { selectCartItemById, plusItem } from '../../redux/slices/cartSlice';
+import { selectCartItemById, plusItem, CartItem } from '../../redux/slices/cartSlice';
 
 type PizzaProps = {
   id: string;
@@ -25,6 +25,7 @@ const Pizza: React.FC<PizzaProps> = ({
   isFrame = false,
 }) => {
   const dispatch = useDispatch();
+
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
@@ -35,12 +36,13 @@ const Pizza: React.FC<PizzaProps> = ({
   const typеFactors = [1, 1.25];
   const sizeFactors = [1, 1.2, 1.6];
 
-  const item = {
+  const item: CartItem = {
     id,
     title,
     price: Math.round(price * typеFactors[activeType] * sizeFactors[activeSize]),
     imageUrl,
     type: typeNames[activeType],
+    count: 0,
     typeFactor: typеFactors[activeType],
     size: sizes[activeSize],
     sizeFactor: sizeFactors[activeSize],

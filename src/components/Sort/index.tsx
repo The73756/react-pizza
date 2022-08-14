@@ -8,7 +8,7 @@ type SortItem = {
   id: number;
   name: string;
   reverseIcon: boolean;
-  sortProperty: string;
+  sortProperty: 'rating' | 'title' | 'price';
   order: 'asc' | 'desc';
 };
 
