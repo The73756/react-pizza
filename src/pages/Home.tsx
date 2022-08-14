@@ -1,22 +1,23 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {
   selectFilter,
   selectSearchValue,
   setCategoryId,
-  setCurrentPage,
+  setCurrentPage
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
+import { useAppDispatch } from '../redux/store';
 
 import Categories from '../components/Categories';
-import Sort from '../components/Sort';
-import Pizza from '../components/Pizza';
 import Pagination from '../components/Pagination';
+import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
+import Sort from '../components/Sort';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { items, countItems, status } = useSelector(selectPizzaData);
   const { categoryId, sort, currentPage } = useSelector(selectFilter);
@@ -46,7 +47,6 @@ const Home: React.FC = () => {
     }
 
     dispatch(
-      // @ts-ignore
       fetchPizzas({
         category,
         search,
