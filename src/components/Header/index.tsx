@@ -9,7 +9,7 @@ import logo from '../../assets/img/pizza-logo.svg';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0); // потом пофиксим any
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0); // потом пофиксим any
   const location = useLocation().pathname;
 
   return (

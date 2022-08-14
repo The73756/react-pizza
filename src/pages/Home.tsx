@@ -62,7 +62,7 @@ const Home: React.FC = () => {
     // eslint-disable-next-line
   }, [categoryId, sort, searchValue, currentPage]);
 
-  const elements = items.map((item: any) => <Pizza key={item.id} {...item} />);
+  const elements = items.map((item) => <Pizza key={item.id} {...item} />);
   const skeletons = [...new Array(4)].map((item, index) => <Skeleton key={index} />);
 
   return (

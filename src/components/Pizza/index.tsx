@@ -30,7 +30,7 @@ const Pizza: React.FC<PizzaProps> = ({
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
 
-  const addedCount = cartItem.reduce((sum: number, item: any) => sum + item.count, 0);
+  const addedCount = cartItem.reduce((sum, item) => sum + item.count, 0);
 
   const typeNames = ['тонкое', 'традиционное'];
   const typеFactors = [1, 1.25];
