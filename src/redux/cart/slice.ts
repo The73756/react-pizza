@@ -1,38 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { calcTotalPrice } from '../../utils/cartTotalPrice';
 import { getCartFromLS } from '../../utils/getCartFromLS';
-import { RootState } from '../store';
+import { CartItem, CartSliceState } from './types';
 
-export type CartItem = {
-  id: string;
-  title: string;
-  type: string;
-  size: number;
-  price: number;
-  imageUrl: string;
-  count: number;
-  typeFactor?: number;
-  sizeFactor?: number;
-  isFullRemove?: boolean;
-};
-
-interface CartSliceState {
-  totalPrice: number;
-  items: CartItem[];
-}
-
-const { totalPrice, items } = getCartFromLS();
-
-const initialState: CartSliceState = {
-  totalPrice: totalPrice,
-  items: items,
-};
+const initialState: CartSliceState = getCartFromLS();
 
 const cartSLice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    //не знаю как избавиться от дублирования кода в поиске элемента :(
     plusItem(state, action: PayloadAction<CartItem>) {
       const findItem = state.items.find((obj) => {
         return (
@@ -63,7 +39,6 @@ const cartSLice = createSlice({
         );
       });
 
-      //если елемент последний или мы полностью удаляем айтем
       if (findItem && (findItem.count === 1 || action.payload.isFullRemove)) {
         state.items = state.items.filter((obj) => obj !== findItem);
       } else if (findItem && findItem.count > 1) {
@@ -80,9 +55,6 @@ const cartSLice = createSlice({
   },
 });
 
-export const selectCart = (state: RootState) => state.cart;
-export const selectCartItemById = (id: string) => (state: RootState) =>
-  state.cart.items.filter((item) => item.id === id);
 export const { plusItem, minusItem, clearItems } = cartSLice.actions;
 
 export default cartSLice.reducer;

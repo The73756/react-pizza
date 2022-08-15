@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 
 import Search from '../Search';
 import styles from './Header.module.scss';
-import { selectCart } from '../../redux/slices/cartSlice';
 
 import logo from '../../assets/img/pizza-logo.svg';
 import { useEffect, useRef } from 'react';
+import { selectCart } from '../../redux/cart/selectors';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
@@ -18,7 +18,6 @@ const Header: React.FC = () => {
     const json = JSON.stringify(items);
     if (isMounted.current) {
       localStorage.setItem('cart', json);
-      console.log(json);
     }
     isMounted.current = true;
   }, [items]);

@@ -2,8 +2,9 @@ import { useState } from 'react';
 import styles from './Pizza.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { selectCartItemById, plusItem, CartItem } from '../../redux/slices/cartSlice';
+import { selectCartItemById } from '../../redux/cart/selectors';
+import { CartItem } from '../../redux/cart/types';
+import { plusItem } from '../../redux/cart/slice';
 
 type PizzaProps = {
   id: string;

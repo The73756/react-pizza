@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useSelector } from 'react-redux';
-import { selectSearchValue } from '../../redux/slices/filterSlice';
+import { selectSearchValue } from '../../redux/filter/selectors';
 
 import styles from './Categories.module.scss';
 

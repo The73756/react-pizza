@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { plusItem, minusItem } from '../../redux/slices/cartSlice';
+import { plusItem, minusItem } from '../../redux/cart/slice';
 
 import styles from './Cart.module.scss';
 
