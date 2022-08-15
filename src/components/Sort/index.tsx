@@ -28,7 +28,11 @@ const sortList: SortItem[] = [
 export const Sort: React.FC<SortProps> = memo(({ value }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+
   const sortRef = useRef<HTMLDivElement>(null);
+  const isMounted = useRef(true);
+
+  const json = JSON.stringify(value);
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
@@ -47,9 +51,14 @@ export const Sort: React.FC<SortProps> = memo(({ value }) => {
     };
 
     document.body.addEventListener('click', handleClickOutside);
+    isMounted.current = true;
 
     return () => document.body.removeEventListener('click', handleClickOutside);
   }, []);
+
+  if (isMounted.current) {
+    localStorage.setItem('sort', json);
+  }
 
   return (
     <div ref={sortRef} className={`${styles.sort} ${isOpen ? styles.open : ''}`}>

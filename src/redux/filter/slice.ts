@@ -1,17 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getSortFromLS } from '../../utils/getSortFromLS';
 import { FilterSliceState, Sort } from './types';
 
 const initialState: FilterSliceState = {
   searchValue: '',
   categoryId: 0,
   currentPage: 1,
-  sort: {
-    id: 0,
-    name: 'популярности',
-    reverseIcon: true,
-    sortProperty: 'rating',
-    order: 'desc',
-  },
+  sort: getSortFromLS(),
 };
 
 const filterSLice = createSlice({
@@ -32,8 +27,6 @@ const filterSLice = createSlice({
     },
   },
 });
-
-
 
 export const { setCategoryId, setSort, setCurrentPage, setSearchValue } = filterSLice.actions;
 
