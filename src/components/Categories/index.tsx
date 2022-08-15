@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSearchValue } from '../../redux/filter/selectors';
 
@@ -13,6 +13,16 @@ const categories = ['Все', 'Мясные', 'Вегетарианская', '�
 
 export const Categories: React.FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
   const searchValue = useSelector(selectSearchValue);
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    const json = JSON.stringify(value);
+    if (isMounted.current) {
+      localStorage.setItem('categoryId', json);
+    }
+    isMounted.current = true;
+  }, [value]);
+
   return (
     <div className={styles.categories}>
       <ul>
@@ -30,3 +40,5 @@ export const Categories: React.FC<CategoriesProps> = memo(({ value, onChangeCate
     </div>
   );
 });
+
+Categories.displayName = 'Categories';

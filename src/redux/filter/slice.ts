@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getSortFromLS } from '../../utils/getSortFromLS';
+import { getCategoryIdFromLS } from '../../utils/getCategoryIdFromLS';
 import { FilterSliceState, Sort } from './types';
 
 const initialState: FilterSliceState = {
   searchValue: '',
-  categoryId: 0,
+  categoryId: getCategoryIdFromLS(),
   currentPage: 1,
   sort: getSortFromLS(),
 };
