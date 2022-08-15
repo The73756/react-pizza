@@ -4,6 +4,7 @@ import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
 
 import axios from 'axios';
+import BackBtn from '../components/BackBtn';
 
 const PizzaFrame: React.FC = () => {
   const [pizza, setPizza] = useState<{
@@ -32,11 +33,29 @@ const PizzaFrame: React.FC = () => {
     fetchPizza();
   }, [id, navigate]);
 
-  if (pizza) {
-    return <Pizza {...pizza} isFrame />;
-  } else {
-    return <Skeleton />;
-  }
+  return (
+    <article className='pizzaFrame'>
+      {pizza ? (
+        <>
+          <div className='left'>
+            <Pizza {...pizza} />
+          </div>
+          <div className='right'>
+            <h2 className='title'>{pizza.title}</h2>
+            <p className='descr'>
+              Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+              Свой даль рекламных, рыбного запятой букв сбить коварный выйти повстречался?
+            </p>
+            <BackBtn />
+          </div>
+        </>
+      ) : (
+        <div className='left'>
+          <Skeleton />
+        </div>
+      )}
+    </article>
+  );
 };
 
 export default PizzaFrame;

@@ -5,7 +5,6 @@ export type Pizza = {
   imageUrl: string;
   sizes: number[];
   types: number[];
-  isFrame: boolean;
 };
 
 export type fetchPizzasArgh = {
