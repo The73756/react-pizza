@@ -8,11 +8,12 @@ import Pagination from '../components/Pagination';
 import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
 import Sort from '../components/Sort';
+import NotFound from '../components/NotFoundBlock';
+
 import { selectFilter, selectSearchValue } from '../redux/filter/selectors';
 import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
 import { fetchPizzas } from '../redux/pizza/asyncActions';
 import { selectPizzaData } from '../redux/pizza/selectors';
-
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -81,7 +82,7 @@ const Home: React.FC = () => {
       )}
 
       {elements.length === 0 && status === 'success' ? (
-        'Пиццы не найдены' // поиск не дал результатов
+        <NotFound isSearch />
       ) : status !== 'error' ? (
         <Pagination currentPage={currentPage} onChangePage={сhangePage} items={countItems} />
       ) : (

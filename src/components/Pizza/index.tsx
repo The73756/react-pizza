@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { selectCartItemById } from '../../redux/cart/selectors';
 import { CartItem } from '../../redux/cart/types';
 import { plusItem } from '../../redux/cart/slice';
+import BackHomeButton from '../BackButton';
 
 type PizzaProps = {
   id: string;
@@ -154,9 +155,7 @@ const Pizza: React.FC<PizzaProps> = ({
             Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
             Свой даль рекламных, рыбного запятой букв сбить коварный выйти повстречался?
           </p>
-          <Link to='/' className={`button ${styles.buttonBack}`}>
-            <span>Вернуться назад</span>
-          </Link>
+          <BackHomeButton />
         </div>
       </article>
     );
