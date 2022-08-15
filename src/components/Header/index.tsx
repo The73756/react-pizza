@@ -6,11 +6,22 @@ import styles from './Header.module.scss';
 import { selectCart } from '../../redux/slices/cartSlice';
 
 import logo from '../../assets/img/pizza-logo.svg';
+import { useEffect, useRef } from 'react';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(selectCart);
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0); // потом пофиксим any
+  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const location = useLocation().pathname;
+  const isMounted = useRef(true);
+
+  useEffect(() => {
+    const json = JSON.stringify(items);
+    if (isMounted.current) {
+      localStorage.setItem('cart', json);
+      console.log(json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <header className={styles.header}>
