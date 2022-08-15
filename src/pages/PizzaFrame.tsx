@@ -23,9 +23,7 @@ const PizzaFrame: React.FC = () => {
         const { data } = await axios.get(`https://62dfc893976ae7460bf39a43.mockapi.io/items/${id}`);
         setPizza(data.items);
       } catch (error) {
-        alert('Ошибка при загрузке данных');
-        console.error(error);
-        navigate('/');
+        return 
       }
     };
 
