@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Cart.module.scss';
 
 import cartEmpty from '../../assets/img/empty-cart.png';
-import BackHomeButton from '../BackButton';
+import BackBtn from '../BackBtn';
 
 const CartEmpty: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const CartEmpty: React.FC = () => {
           Для того, чтобы заказать пиццу, перейди на главную страницу.
         </p>
         <img src={cartEmpty} alt='' aria-hidden='true' />
-        <BackHomeButton/>
+        <BackBtn />
       </div>
     </>
   );

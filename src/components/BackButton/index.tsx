@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
-import styles from './BackHomeButton.module.scss';
+import styles from './BackBtn.module.scss';
 
-const BackHomeButton: React.FC = () => {
+const BackBtn: React.FC = () => {
   return (
-    <Link to='/' className={`button ${styles.backButton}`}>
+    <Link to='/' className={`button ${styles.BackBtn}`}>
       На главную
     </Link>
   );
 };
 
-export default BackHomeButton;
+export default BackBtn;

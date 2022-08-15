@@ -1,4 +1,4 @@
-import BackHomeButton from '../BackButton';
+import BackBtn from '../BackBtn';
 import styles from './NotFoundBlock.module.scss';
 
 type NotFoundBlockProps = {
@@ -17,7 +17,7 @@ const NotFound: React.FC<NotFoundBlockProps> = ({ isSearch }) => {
           ? 'Может, вы найдете в нашем ассортименте что то другое?'
           : 'Ой! Вы куда то не туда жмали!'}
       </p>
-      {!isSearch ? <BackHomeButton /> : ''}
+      {!isSearch ? <BackBtn /> : ''}
     </div>
   );
 };
