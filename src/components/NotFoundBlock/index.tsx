@@ -14,7 +14,7 @@ const NotFound: React.FC<NotFoundBlockProps> = ({ isSearch }) => {
       </h1>
       <p className={styles.descr}>
         {isSearch
-          ? 'Может, вы найдете в нашем ассортименте что то другое?'
+          ? 'Может, вы найдете в нашем ассортименте, что то другое?'
           : 'Ой! Вы куда то не туда жмали!'}
       </p>
       {!isSearch ? <BackBtn /> : ''}
