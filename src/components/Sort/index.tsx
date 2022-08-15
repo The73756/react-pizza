@@ -25,7 +25,7 @@ const sortList: SortItem[] = [
   { id: 5, name: 'цене', reverseIcon: true, sortProperty: 'price', order: 'desc' },
 ];
 
-const Sort: React.FC<SortProps> = memo(({ value }) => {
+export const Sort: React.FC<SortProps> = memo(({ value }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
@@ -110,5 +110,3 @@ const Sort: React.FC<SortProps> = memo(({ value }) => {
     </div>
   );
 });
-
-export default Sort;

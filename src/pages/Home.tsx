@@ -3,12 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '../redux/store';
 
-import Categories from '../components/Categories';
-import Pagination from '../components/Pagination';
-import Pizza from '../components/Pizza';
-import Skeleton from '../components/Pizza/Skeleton';
-import Sort from '../components/Sort';
-import NotFound from '../components/NotFoundBlock';
+import { Pizza, Skeleton, Categories, NotFoundBlock, Pagination, Sort } from '../components';
 
 import { selectFilter, selectSearchValue } from '../redux/filter/selectors';
 import { setCategoryId, setCurrentPage } from '../redux/filter/slice';
@@ -82,7 +77,7 @@ const Home: React.FC = () => {
       )}
 
       {elements.length === 0 && status === 'success' ? (
-        <NotFound isSearch />
+        <NotFoundBlock isSearch />
       ) : status !== 'error' ? (
         <Pagination currentPage={currentPage} onChangePage={сhangePage} items={countItems} />
       ) : (

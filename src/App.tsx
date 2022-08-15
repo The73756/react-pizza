@@ -1,8 +1,8 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
+import { Preloader } from './components';
 import Home from './pages/Home';
-import Preloader from './components/Preloader';
 import MainLayout from './layouts/MainLayout';
 
 import './scss/app.scss';

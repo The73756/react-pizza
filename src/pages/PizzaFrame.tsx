@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Pizza from '../components/Pizza';
-import Skeleton from '../components/Pizza/Skeleton';
+
+import { Pizza, BackBtn, Skeleton } from '../components';
 
 import axios from 'axios';
-import BackBtn from '../components/BackBtn';
 
 const PizzaFrame: React.FC = () => {
   const [pizza, setPizza] = useState<{

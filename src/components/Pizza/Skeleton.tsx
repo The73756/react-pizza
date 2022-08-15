@@ -3,7 +3,7 @@ import ContentLoader from 'react-content-loader';
 
 import styles from './Pizza.module.scss';
 
-const Skeleton: React.FC = () => (
+export const Skeleton: React.FC = () => (
   <ContentLoader
     className={styles.pizza}
     speed={2}
@@ -19,5 +19,3 @@ const Skeleton: React.FC = () => (
     <rect x='125' y='427' rx='24' ry='24' width='152' height='45' />
   </ContentLoader>
 );
-
-export default Skeleton;

@@ -15,7 +15,7 @@ type PizzaProps = {
   types: number[];
 };
 
-const Pizza: React.FC<PizzaProps> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const Pizza: React.FC<PizzaProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispatch = useDispatch();
 
   const cartItem = useSelector(selectCartItemById(id));
@@ -92,5 +92,3 @@ const Pizza: React.FC<PizzaProps> = ({ id, title, price, imageUrl, sizes, types 
     </article>
   );
 };
-
-export default Pizza;

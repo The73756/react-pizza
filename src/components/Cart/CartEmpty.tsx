@@ -1,9 +1,9 @@
 import styles from './Cart.module.scss';
 
 import cartEmpty from '../../assets/img/empty-cart.png';
-import BackBtn from '../BackBtn';
+import { BackBtn } from '../BackBtn';
 
-const CartEmpty: React.FC = () => {
+export const CartEmpty: React.FC = () => {
   return (
     <>
       <div className={styles.cartEmpty}>
@@ -19,5 +19,3 @@ const CartEmpty: React.FC = () => {
     </>
   );
 };
-
-export default CartEmpty;

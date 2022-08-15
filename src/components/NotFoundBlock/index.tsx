@@ -1,11 +1,12 @@
-import BackBtn from '../BackBtn';
+import { BackBtn } from '../BackBtn';
+
 import styles from './NotFoundBlock.module.scss';
 
 type NotFoundBlockProps = {
   isSearch?: boolean;
 };
 
-const NotFound: React.FC<NotFoundBlockProps> = ({ isSearch }) => {
+export const NotFoundBlock: React.FC<NotFoundBlockProps> = ({ isSearch }) => {
   return (
     <div className={styles.notFound}>
       <h1>
@@ -21,4 +22,3 @@ const NotFound: React.FC<NotFoundBlockProps> = ({ isSearch }) => {
     </div>
   );
 };
-export default NotFound;

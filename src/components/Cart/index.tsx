@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Cart.module.scss';
-import CartItem from './CartItem';
-import CartEmpty from './CartEmpty';
+
+import { CartItem } from './CartItem';
+import { CartEmpty } from './CartEmpty';
 import { clearItems } from '../../redux/cart/slice';
 import { selectCart } from '../../redux/cart/selectors';
 
-const CartBlock: React.FC = () => {
+export const CartBlock: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(selectCart);
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
@@ -107,5 +108,3 @@ const CartBlock: React.FC = () => {
     </div>
   );
 };
-
-export default CartBlock;
