@@ -14,10 +14,10 @@ const PizzaFrame = lazy(() => import('./pages/PizzaFrame'));
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<MainLayout />}>
+      <Route path={process.env.PUBLIC_URL + '/'} element={<MainLayout />}>
         <Route path='' element={<Home />} />
         <Route
-          path='cart'
+          path={process.env.PUBLIC_URL + '/cart'}
           element={
             <Suspense fallback={<Preloader />}>
               <Cart />
@@ -25,7 +25,7 @@ function App() {
           }
         />
         <Route
-          path='pizza/:id'
+          path={process.env.PUBLIC_URL + '/pizza/:id'}
           element={
             <Suspense fallback={<Preloader />}>
               <PizzaFrame />
@@ -33,7 +33,7 @@ function App() {
           }
         />
         <Route
-          path='*'
+          path={process.env.PUBLIC_URL + '/*'}
           element={
             <Suspense fallback={<Preloader />}>
               <NotFound />

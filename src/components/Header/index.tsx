@@ -25,18 +25,18 @@ export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <Link to='/' className={styles.logo}>
+        <Link to={process.env.PUBLIC_URL + '/'} className={styles.logo}>
           <img width='38' src={logo} alt='Pizza logo' />
           <div>
             <h1>React Pizza</h1>
             <p>самая вкусная пицца во вселенной</p>
           </div>
         </Link>
-        {location !== '/cart' ? (
+        {location !== `${process.env.PUBLIC_URL}/cart` ? (
           <>
             <Search />
             <div className={styles.cart}>
-              <Link to='cart' className='button button--cart'>
+              <Link to={process.env.PUBLIC_URL + '/cart'} className='button button--cart'>
                 <span className={styles.price}>{totalPrice} ₽</span>
                 <span className='button__delimiter'></span>
                 <span className={styles.cart}>

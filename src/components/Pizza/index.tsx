@@ -45,7 +45,7 @@ export const Pizza: React.FC<PizzaProps> = ({ id, title, price, imageUrl, sizes,
   };
   return (
     <article className={styles.pizza}>
-      <Link to={`pizza/${id}`}>
+      <Link to={process.env.PUBLIC_URL + `/pizza/${id}`}>
         <img className={styles.image} width={270} height={270} src={imageUrl} alt={title} />
         <h4 className={styles.title}>{title}</h4>
       </Link>
