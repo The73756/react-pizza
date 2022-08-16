@@ -13,7 +13,7 @@ const categories = ['Все', 'Мясные', 'Вегетарианская', '�
 
 export const Categories: React.FC<CategoriesProps> = memo(({ value, onChangeCategory }) => {
   const searchValue = useSelector(selectSearchValue);
-  const isMounted = useRef(true);
+  const isMounted = useRef(false);
 
   useEffect(() => {
     const json = JSON.stringify(value);

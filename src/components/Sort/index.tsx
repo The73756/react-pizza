@@ -30,7 +30,7 @@ export const Sort: React.FC<SortProps> = memo(({ value }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
-  const isMounted = useRef(true);
+  const isMounted = useRef(false);
 
   const handleClickPopup = () => {
     setIsOpen(!isOpen);
@@ -42,6 +42,16 @@ export const Sort: React.FC<SortProps> = memo(({ value }) => {
   };
 
   useEffect(() => {
+    const json = JSON.stringify(value);
+
+    if (isMounted.current) {
+      localStorage.setItem('sort', json);
+    }
+
+    isMounted.current = true;
+  }, [value]);
+
+  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sortRef.current && !event.composedPath().includes(sortRef.current)) {
         setIsOpen(false);
@@ -49,15 +59,8 @@ export const Sort: React.FC<SortProps> = memo(({ value }) => {
     };
     document.body.addEventListener('click', handleClickOutside);
 
-    const json = JSON.stringify(value);
-    if (isMounted.current) {
-      localStorage.setItem('sort', json);
-    }
-
-    isMounted.current = true;
-
     return () => document.body.removeEventListener('click', handleClickOutside);
-  }, [value]);
+  }, []);
 
   return (
     <div ref={sortRef} className={`${styles.sort} ${isOpen ? styles.open : ''}`}>
