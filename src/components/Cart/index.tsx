@@ -82,7 +82,7 @@ export const CartBlock: React.FC = () => {
           </div>
           <div className={styles.bottomButtons}>
             <Link
-              to={process.env.PUBLIC_URL + '/'}
+              to='/'
               className={`button button--outline button--add ${styles.goBackBtn}`}>
               <svg
                 width='8'
