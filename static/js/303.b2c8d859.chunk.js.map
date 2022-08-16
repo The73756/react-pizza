@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/303.b2c8d859.chunk.js","mappings":"6IAMA,UAJuB,WACrB,OAAO,SAAC,KAAD,GACR,C","sources":["pages/Cart.tsx"],"sourcesContent":["import { CartBlock } from '../components';\r\n\r\nconst Cart: React.FC = () => {\r\n  return <CartBlock />;\r\n};\r\n\r\nexport default Cart;\r\n"],"names":[],"sourceRoot":""}
